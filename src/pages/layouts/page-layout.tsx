@@ -1,5 +1,7 @@
 import { Outlet } from "react-router";
 import Navbar from "../../components/navbar";
+import Footer from "../../components/footer";
+// import TechStackFooter from "../../components/techStack";
 
 const PageLayout = () => {
   return (
@@ -7,6 +9,8 @@ const PageLayout = () => {
       <Navbar />
 
       <Outlet />
+      {/* <TechStackFooter /> */}
+      <Footer />
     </div>
   );
 };
