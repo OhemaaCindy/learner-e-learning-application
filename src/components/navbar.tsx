@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router";
 
 interface NavLink {
   name: string;
@@ -7,6 +8,7 @@ interface NavLink {
 }
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const navLinks: NavLink[] = [
@@ -16,6 +18,11 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
+    // navigate("/login");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
   };
 
   return (
@@ -40,14 +47,15 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <button className="flex items-center space-x-2 text-[#01589A] border border-[#01589A] hover:bg-blue-50 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer">
+            <button
+              className="flex items-center space-x-2 text-[#01589A] border border-[#01589A] hover:bg-blue-50 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer"
+              onClick={handleLogin}
+            >
               <span>Login</span>
-              {/* <ArrowRight className="h-4 w-4" /> */}
               <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
             </button>
             <button className="flex items-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm cursor-pointer">
               <span>sign up</span>
-              {/* <ArrowRight className="h-4 w-4" /> */}
               <img
                 src="/white-arrow.png"
                 alt="arrow"
@@ -101,7 +109,6 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               <span>Login</span>
-              {/* <ArrowRight className="h-4 w-4" /> */}
               <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
             </button>
             <button
@@ -109,7 +116,6 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               <span>sign up</span>
-              {/* <ArrowRight className="h-4 w-4" /> */}
               <img
                 src="/white-arrow.png"
                 alt="arrow"

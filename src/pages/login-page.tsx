@@ -1,5 +1,11 @@
+import { LoginForm } from "../components/login-form";
+
 const LoginPage = () => {
-  return <div className="bg-amber-700">Lvgbnm,</div>;
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  );
 };
 
 export default LoginPage;

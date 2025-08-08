@@ -1,16 +1,18 @@
 import { Outlet } from "react-router";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-// import TechStackFooter from "../../components/techStack";
 
 const PageLayout = () => {
   return (
-    <div className="bg-red-800">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <Outlet />
-      {/* <TechStackFooter /> */}
-      <Footer />
+      <div className="flex-1">
+        <Outlet />
+      </div>
+      <div className="mt-auto">
+        <Footer />
+      </div>
     </div>
   );
 };
