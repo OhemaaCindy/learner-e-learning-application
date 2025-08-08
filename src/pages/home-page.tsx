@@ -1,5 +1,7 @@
+import HeroSection from "@/components/potential-section";
+
 const HomePage = () => {
-  return <div>ytfuiukhl</div>;
+  return <HeroSection />;
 };
 
 export default HomePage;
