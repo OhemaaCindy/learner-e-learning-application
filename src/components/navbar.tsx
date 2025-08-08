@@ -24,6 +24,9 @@ const Navbar: React.FC = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+  const handleRegister = () => {
+    navigate("/register");
+  };
 
   return (
     <nav className="bg-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
@@ -54,7 +57,10 @@ const Navbar: React.FC = () => {
               <span>Login</span>
               <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
             </button>
-            <button className="flex items-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm cursor-pointer">
+            <button
+              className="flex items-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm cursor-pointer"
+              onClick={handleRegister}
+            >
               <span>sign up</span>
               <img
                 src="/white-arrow.png"
