@@ -28,11 +28,19 @@ const Navbar: React.FC = () => {
     navigate("/register");
   };
 
+  const handleRoute = () => {
+    navigate("/");
+  };
   return (
     <nav className="bg-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center h-16">
-          <img src="/logo.png" alt="logo" className="w-20 h-8" />
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="w-20 h-8 cursor-pointer"
+            onClick={handleRoute}
+          />
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
