@@ -10,7 +10,6 @@ const HeroSection: React.FC = () => {
       {/* Main content container */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
-          {/* Left column - Text content */}
           <div className="text-white space-y-6 max-w-2xl mx-auto lg:mx-0">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
               Unlock Your Potential with Industry-Leading Courses!

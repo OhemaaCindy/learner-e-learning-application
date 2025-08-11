@@ -22,69 +22,6 @@ function App() {
         { path: "reset-password", element: <ResetPassword /> },
       ],
     },
-
-    // {
-    //   path: "/",
-    //   element: <Pagelayout />,
-    //   children: [
-    //     {
-    //       path: "true",
-    //       element: <Overview />,
-    //     },
-    //         {
-    //   path: "/",
-    //   element: <Authlayout />,
-    //   children: [
-    //     {
-    //       path: 'login',
-    //       element: <LoginPage />,
-    //     },
-    //     {
-    //       path: "register",
-    //       element: <RegistrationPage />,
-    //     },
-    //     {
-    //       path: "otp-verification",
-    //       element: <Otpverification />,
-    //     },
-    //     {
-    //       path: "request-password-reset",
-    //       element: <Requestpasswordreset />,
-    //     },
-    //     {
-    //       path: "reset-password/:id",
-    //       element: <ResetPassword />,
-    //     },
-    //     {
-    //       path: "invoices",
-    //       element: <Invoices />,
-    //     },
-    //     {
-    //       path: "learners",
-    //       element: <Learners />,
-    //     },
-    //     {
-    //       path: "tracks",
-    //       element: <Track />,
-    //     },
-    //     {
-    //       path: "tracks/:id",
-    //       element: <TrackDetails />,
-    //     },
-    //     {
-    //       path: "courses",
-    //       element: <Courses />,
-    //     },
-    //     {
-    //       path: "report",
-    //       element: <Report />,
-    //     },
-    //     {
-    //       path: "profile",
-    //       element: <ProfilePage />,
-    //     },
-    //   ],
-    //     },
   ]);
 
   return (
