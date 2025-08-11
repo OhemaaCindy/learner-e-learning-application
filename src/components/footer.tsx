@@ -5,12 +5,12 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#01589A] text-white mt-auto">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-8 lg:py-12">
+      <div className="container mx-auto px-20 py-8 lg:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Logo Section */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <img src="/logo2.png" alt="logo" className="w-50 h-20 md:w-80" />
+            <div className="flex items-center space-x- mb-6">
+              <img src="/logo2.png" alt="logo" className=" h-15 md:w-80" />
             </div>
           </div>
 

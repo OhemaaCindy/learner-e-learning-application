@@ -2,13 +2,13 @@ import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative ">
+    <section className="relative bg-green-700">
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0  bg-[url('/home-bg.jpg')] bg-cover bg-center bg-no-repeat "></div>
       <div className="absolute inset-0  opacity-30 bg-gradient-to-r from-sky-800 from-10% via-sky-700 via-30% "></div>
 
       {/* Main content container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20 min-h-screen flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
           <div className="text-white space-y-6 max-w-2xl mx-auto lg:mx-0">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">

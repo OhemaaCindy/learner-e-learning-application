@@ -44,7 +44,7 @@ const TrackSection = () => {
         Create your account quickly with just your email or social media login,
         then explore a wide range
       </p>
-      <div className="flex gap-8">
+      <div className="flex gap-5">
         {cardDetails.map((item) => (
           <div
             key={item.id}
