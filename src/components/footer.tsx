@@ -3,21 +3,17 @@ import { ArrowUp, Linkedin, Facebook } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#01589A] text-white mt-auto">
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-20 py-8 lg:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Logo Section */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <div className="flex items-center space-x- mb-6">
-              <img src="/logo2.png" alt="logo" className=" h-15 md:w-80" />
-            </div>
-          </div>
+    <>
+      <footer className="bg-[#01589A] flex justify-between px-48 py-10">
+        <div className="flex items-center space-x- mb-6">
+          <img src="/logo2.png" alt="logo" className=" h-15 md:w-50" />
+        </div>
+        {/* Menu Section */}
 
-          {/* Menu Section */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Menu</h3>
-            <ul className="space-y-2">
+        <div className="flex   w-150  gap-30 ">
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white">Menu</h3>
+            <ul className="space-y-2 text-white">
               <li>
                 <a
                   href="#"
@@ -37,10 +33,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact Section */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <div className="space-y-2">
+          <div>
+            {/* Contact Section */}
+            <h3 className="text-lg font-semibold mb-4 text-white">Contact</h3>
+            <div className="space-y-2 text-white">
               <p className="hover:text-blue-200 transition-colors duration-200 cursor-pointer">
                 +23341002000
               </p>
@@ -50,11 +46,11 @@ const Footer: React.FC = () => {
 
           {/* Social Section */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Social</h3>
-            <div className="space-y-2">
+            <h3 className="text-lg font-semibold mb-4 text-white">Social</h3>
+            <div className="space-y-2 text-white">
               <a
                 href="#"
-                className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 underline"
+                className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 underline "
               >
                 <Linkedin size={16} />
                 <span>LinkedIn</span>
@@ -69,14 +65,13 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </footer>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-blue-500/30">
-        <div className="container mx-auto px-4 py-4">
+      <div className="border-t border-blue-500/30 bg-[#01589A]">
+        <div className="container mx-auto px-25 py-4 ">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
             {/* Copyright */}
-            <div className="flex items-center space-x-2 text-sm">
+            <div className="flex items-center space-x-2 text-sm text-white">
               <span className="text-lg">©</span>
               <span>copyright 2025 - G-client, All rights reserved</span>
             </div>
@@ -84,9 +79,9 @@ const Footer: React.FC = () => {
             {/* Back to Top */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 group"
+              className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 group  pr-15 pl-4 text-white"
             >
-              <span className="text-sm">Back to top</span>
+              <span className="text-sm ">Back to top</span>
               <ArrowUp
                 size={16}
                 className="group-hover:transform group-hover:-translate-y-1 transition-transform duration-200"
@@ -95,8 +90,11 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </>
   );
 };
 
 export default Footer;
+{
+  /* Bottom Bar */
+}

@@ -72,7 +72,7 @@ const TechStackSection: React.FC = () => {
           </div>
           {/* Right Content - Device Mockups */}
           <div className=" bg-[url('/techStack-bg.png')]   bg-no-repeat   h-full"></div>
-          <div className="absolute left-230 top-50 bg-[url('/mobile.png')]  bg-no-repeat h-full w-full"></div>
+          <div className="absolute left-230 top-50 bg-[url('/mobile.png')]  bg-no-repeat h-60 w-40 "></div>
         </div>
       </div>
     </div>
