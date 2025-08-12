@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative bg-green-700">
+    <section className="relative ">
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0  bg-[url('/home-bg.jpg')] bg-cover bg-center bg-no-repeat "></div>
       <div className="absolute inset-0  opacity-30 bg-gradient-to-r from-sky-800 from-10% via-sky-700 via-30% "></div>

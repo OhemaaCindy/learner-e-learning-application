@@ -7,6 +7,7 @@ import SignUpPage from "./pages/signUp-page";
 import OtpVerificationPage from "./pages/otpVerification-page";
 import ForgotPassword from "./pages/forgot-password-page";
 import ResetPassword from "./pages/reset-password";
+import TracksPage from "./pages/tracks-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +21,7 @@ function App() {
         { path: "otp-verification", element: <OtpVerificationPage /> },
         { path: "forgot-password", element: <ForgotPassword /> },
         { path: "reset-password", element: <ResetPassword /> },
+        { path: "tracks", element: <TracksPage /> },
       ],
     },
   ]);

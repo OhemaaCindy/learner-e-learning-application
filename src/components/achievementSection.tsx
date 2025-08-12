@@ -26,7 +26,7 @@ const AchievementSection = () => {
         <h1 className="text-2xl sm:text-4xl lg:text-5xl font-semibold leading-tight item-center mb-4">
           We are proud
         </h1>
-        <p className="font-semibold mb-10">
+        <p className="font-semibold mb-5">
           We take pride in our achievements and commitment to excellence. Join
           us in celebrating innovation, growth, and success.
         </p>
