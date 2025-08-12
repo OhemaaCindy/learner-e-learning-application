@@ -5,6 +5,7 @@ import { InputField } from "./inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "./../../node_modules/@hookform/resolvers/zod/src/zod";
 import { Link } from "react-router";
+import { LockKeyhole, Mail } from "lucide-react";
 
 export function LoginForm({
   className,
@@ -24,7 +25,7 @@ export function LoginForm({
       className={cn("flex flex-col gap-6 max-w-6xl mx-auto mt-7", className)}
       {...props}
     >
-      <Card className="overflow-hidden p-0">
+      <Card className="overflow-hidden p-0 shadow-none border-none">
         <CardContent className="grid p-0 md:grid-cols-2">
           <div className="flex justify-center items-center">
             <img
@@ -64,23 +65,23 @@ export function LoginForm({
               </div>
               <form>
                 <InputField
-                  label="Email"
                   name="email"
                   type="email"
+                  placeholder="Email"
                   register={register}
                   error={errors.email?.message}
-                  required
+                  iconLeft={<Mail className="w-4 h-4" />}
                 />
 
                 <InputField
-                  label="Password"
+                  placeholder="Password"
                   name="email"
                   type="email"
                   register={register}
                   error={errors.email?.message}
-                  required
+                  iconLeft={<LockKeyhole className="w-4 h-4" />}
                 />
-                <Link to="/request-password-reset">
+                <Link to="/forgot-password">
                   <h1 className="text-[#01589A]">Forgot your password?</h1>
                 </Link>
 

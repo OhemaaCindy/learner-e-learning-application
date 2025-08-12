@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { InputField } from "./inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "./../../node_modules/@hookform/resolvers/zod/src/zod";
-import { Link } from "react-router";
+import { Eye, LockKeyhole, Mail, UserRound } from "lucide-react";
 
 export function RegisterForm({
   className,
@@ -27,7 +27,7 @@ export function RegisterForm({
       )}
       {...props}
     >
-      <Card className="overflow-hidden p-0">
+      <Card className="overflow-hidden p-0 shadow-none border-none">
         <CardContent className="grid p-0 md:grid-cols-2">
           <div className="flex justify-center items-center">
             <img
@@ -67,47 +67,55 @@ export function RegisterForm({
               </div>
               <form>
                 <InputField
-                  label="First Name"
+                  // label="First Name"
+                  placeholder="First Name"
                   name="email"
                   type="email"
                   register={register}
                   error={errors.email?.message}
-                  required
+                  // required
+                  iconLeft={<UserRound className="w-4 h-4" />}
                 />
 
                 <InputField
-                  label="Last Name"
+                  placeholder="Last Name"
+                  // label="Last Name"
                   name="email"
                   type="email"
                   register={register}
                   error={errors.email?.message}
-                  required
+                  // required
+                  iconLeft={<UserRound className="w-4 h-4" />}
                 />
                 <InputField
-                  label="Email"
+                  placeholder="Email"
                   name="email"
                   type="email"
                   register={register}
                   error={errors.email?.message}
                   required
-                />
-
-                <InputField
-                  label="Password"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  required
+                  iconLeft={<Mail className="w-4 h-4" />}
                 />
 
                 <InputField
-                  label="Confirm Password"
+                  placeholder="Password"
+                  name="email"
+                  type="email"
+                  register={register}
+                  error={errors.email?.message}
+                  iconLeft={<LockKeyhole className="w-4 h-4" />}
+                  iconRight={<Eye className="w-4 h-4" />}
+                />
+
+                <InputField
+                  placeholder="Confirm Password"
                   name="email"
                   type="email"
                   register={register}
                   error={errors.email?.message}
                   required
+                  iconLeft={<LockKeyhole className="w-4 h-4" />}
+                  iconRight={<Eye className="w-4 h-4" />}
                 />
 
                 <div className="pt-4">
