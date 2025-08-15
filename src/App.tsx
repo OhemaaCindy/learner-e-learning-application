@@ -8,6 +8,7 @@ import OtpVerificationPage from "./pages/otpVerification-page";
 import ForgotPassword from "./pages/forgot-password-page";
 import ResetPassword from "./pages/reset-password";
 import TracksPage from "./pages/tracks-page";
+import { TrackDetailsPage } from "./pages/track-details-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,7 @@ function App() {
         { path: "forgot-password", element: <ForgotPassword /> },
         { path: "reset-password", element: <ResetPassword /> },
         { path: "tracks", element: <TracksPage /> },
+        { path: "/track/:id", element: <TrackDetailsPage /> },
       ],
     },
   ]);

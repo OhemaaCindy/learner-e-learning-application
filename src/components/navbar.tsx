@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
               key={link.name}
               href={link.href}
               className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
-              onClick={() => setIsMenuOpen(false)}
+              // onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
             </a>
@@ -120,14 +120,14 @@ const Navbar: React.FC = () => {
           <div className="pt-4 pb-2 space-y-3">
             <button
               className="w-full flex items-center justify-center space-x-2 text-[#01589A] border border-[#01589A]  hover:bg-blue-50 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={handleLogin}
             >
               <span>Login</span>
               <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
             </button>
             <button
-              className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
-              onClick={() => setIsMenuOpen(false)}
+              className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#01589A] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
+              onClick={handleRegister}
             >
               <span>sign up</span>
               <img
