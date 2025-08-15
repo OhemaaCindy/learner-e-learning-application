@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/forgot-password-page";
 import ResetPassword from "./pages/reset-password";
 import TracksPage from "./pages/tracks-page";
 import { TrackDetailsPage } from "./pages/track-details-page";
+import CheckoutPage from "./pages/checkout-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,7 @@ function App() {
         { path: "reset-password", element: <ResetPassword /> },
         { path: "tracks", element: <TracksPage /> },
         { path: "/track/:id", element: <TrackDetailsPage /> },
+        { path: "/checkout", element: <CheckoutPage /> },
       ],
     },
   ]);
