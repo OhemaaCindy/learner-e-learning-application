@@ -1,16 +1,14 @@
-import React from "react";
 import { ArrowUp, Linkedin, Facebook } from "lucide-react";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <>
-      <footer className="bg-[#01589A] flex justify-between px-48 py-10">
-        <div className="flex items-center space-x- mb-6">
-          <img src="/logo2.png" alt="logo" className=" h-15 md:w-50" />
+    <div className="bg-[#01589A]">
+      <footer className="flex flex-col lg:flex-row justify-between mx-auto max-w-7xl p-4 sm:p-6 lg:p-10 w-full">
+        <div className="flex items-center space-x-2 mb-6 lg:mb-0">
+          <img src="/logo2.png" alt="logo" className="h-10 w-auto sm:w-40" />
         </div>
         {/* Menu Section */}
-
-        <div className="flex   w-150  gap-30 ">
+        <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 lg:gap-30 w-full lg:w-auto">
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white">Menu</h3>
             <ul className="space-y-2 text-white">
@@ -45,12 +43,12 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Social Section */}
-          <div className="col-span-1">
+          <div>
             <h3 className="text-lg font-semibold mb-4 text-white">Social</h3>
             <div className="space-y-2 text-white">
               <a
                 href="#"
-                className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 underline "
+                className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 underline"
               >
                 <Linkedin size={16} />
                 <span>LinkedIn</span>
@@ -66,35 +64,33 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </footer>
+      <div className="bg-[#01589A]">
+        <div className="border-t border-blue-500/30 mx-auto max-w-7xl">
+          <div className="container mx-auto px-4 sm:px-6 py-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+              {/* Copyright */}
+              <div className="flex items-center space-x-2 text-sm text-white text-center sm:text-left">
+                <span className="text-lg">©</span>
+                <span>copyright 2025 - G-client, All rights reserved</span>
+              </div>
 
-      <div className="border-t border-blue-500/30 bg-[#01589A]">
-        <div className="container mx-auto px-25 py-4 ">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-            {/* Copyright */}
-            <div className="flex items-center space-x-2 text-sm text-white">
-              <span className="text-lg">©</span>
-              <span>copyright 2025 - G-client, All rights reserved</span>
+              {/* Back to Top */}
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 group text-white"
+              >
+                <span className="text-sm">Back to top</span>
+                <ArrowUp
+                  size={16}
+                  className="group-hover:transform group-hover:-translate-y-1 transition-transform duration-200"
+                />
+              </button>
             </div>
-
-            {/* Back to Top */}
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center space-x-2 hover:text-blue-200 transition-colors duration-200 group  pr-15 pl-4 text-white"
-            >
-              <span className="text-sm ">Back to top</span>
-              <ArrowUp
-                size={16}
-                className="group-hover:transform group-hover:-translate-y-1 transition-transform duration-200"
-              />
-            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default Footer;
-{
-  /* Bottom Bar */
-}
