@@ -35,12 +35,12 @@ const TracksPage = () => {
     },
   ];
   return (
-    <>
-      <div className="bg-[#02589A] text-white p-10 flex justify-center">
+    <div className="bg-[#02589A]">
+      <div className=" max-w-7xl mx-auto  text-white p-10 flex justify-center ">
         <div className="font-bold text-lg">Tracks</div>
       </div>
       <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto ">
           {/* Search Bar */}
           <div className="mb-8">
             <div className="relative max-w-md">
@@ -66,7 +66,7 @@ const TracksPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

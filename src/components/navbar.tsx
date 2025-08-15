@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
               <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
             </button>
             <button
-              className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
+              className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#01589A] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
               onClick={handleRegister}
             >
               <span>sign up</span>

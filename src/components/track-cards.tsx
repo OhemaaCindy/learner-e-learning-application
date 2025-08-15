@@ -1,4 +1,5 @@
 import { Monitor } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export const CourseCard = ({
   icon: Icon,
@@ -41,7 +42,11 @@ export const CourseCard = ({
 
     return stars;
   };
+  const navigate = useNavigate();
 
+  const handleNavigation = () => {
+    navigate("/track/:id");
+  };
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       {/* Course Image/Icon Section */}
@@ -171,7 +176,10 @@ export const CourseCard = ({
         </div>
 
         {/* Preview Button */}
-        <button className="w-full bg-[#01589A] hover:bg-blue-400 cursor-pointer text-white py-3 px-4 rounded-md font-medium transition-colors duration-200">
+        <button
+          className="w-full bg-[#01589A] hover:bg-blue-400 cursor-pointer text-white py-3 px-4 rounded-md font-medium transition-colors duration-200"
+          onClick={handleNavigation}
+        >
           Preview course
         </button>
       </div>

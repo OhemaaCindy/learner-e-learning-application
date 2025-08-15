@@ -1,13 +1,12 @@
-import { Clock, BookOpen, User, Calendar, Star } from "lucide-react";
+import { Clock, Calendar, Star, GraduationCap } from "lucide-react";
 
 export const TrackDetailsPage = () => {
   return (
-    <div className="flex ">
-      <div className="flex-2">
-        <div className="bg-gray-50 ">
-          {/* Header Navigation */}
-          <div className="bg-[#01589A] text-white px-4 sm:px-6 py-3 sm:py-4">
-            <nav className="flex items-center space-x-2 text-xs sm:text-sm max-w-6xl mx-auto">
+    <div className="relative">
+      <div className="bg-[#01589A]">
+        <div className="max-w-7xl mx-auto">
+          <div className=" text-white py-3 sm:py-4   ">
+            <nav className="flex items-center space-x-2 text-xs sm:text-sm">
               <a href="/" className="hover:text-blue-200 truncate">
                 Home
               </a>
@@ -21,8 +20,8 @@ export const TrackDetailsPage = () => {
           </div>
 
           {/* Hero Section */}
-          <div className="bg-[#01589A] text-white">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className=" text-white">
+            <div className=" py-8 sm:py-12">
               <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                 <div>
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
@@ -59,9 +58,14 @@ export const TrackDetailsPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex-2 max-w-7xl mx-auto">
+        <div className="">
+          {/* Header Navigation */}
 
           {/* Main Content */}
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className=" py-8 sm:py-12">
             <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
               {/* Left Column - Course Content */}
               <div className="lg:col-span-2 order-2 lg:order-1">
@@ -101,13 +105,12 @@ export const TrackDetailsPage = () => {
                     {/* Data Science Course */}
                     <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow">
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="bg-purple-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-                          <div className="w-8 sm:w-12 h-8 sm:h-12 bg-purple-200 rounded flex items-center justify-center">
-                            <div className="text-purple-600 text-xs font-bold">
-                              📊
-                            </div>
-                          </div>
-                        </div>
+                        <img
+                          src="/track-image.png"
+                          alt="image"
+                          className="w-30 h-30 object-cover"
+                        />
+
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-base sm:text-lg mb-2">
                             Data Science Mastery
@@ -123,13 +126,11 @@ export const TrackDetailsPage = () => {
                     {/* Cloud Computing Course */}
                     <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow">
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="bg-orange-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-                          <div className="w-8 sm:w-12 h-8 sm:h-12 bg-orange-200 rounded flex items-center justify-center">
-                            <div className="text-orange-600 text-xs font-bold">
-                              ☁️
-                            </div>
-                          </div>
-                        </div>
+                        <img
+                          src="/track-image.png"
+                          alt="image"
+                          className="w-30 h-30 object-cover"
+                        />
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-base sm:text-lg mb-2">
                             Cloud Computing
@@ -148,65 +149,58 @@ export const TrackDetailsPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1">
-        <div className=" p-6 bg-[#01589A]">
-          <img src="/track-image.png" alt="image" className="" />
-        </div>
-
-        <div className="text-start pl-6 mt-4 sm:mt-6">
-          <h3 className="font-semibold text-gray-800 text-sm sm:text-base">
+      <div className="absolute right-50 bottom-80">
+        <div className=" px-7 py-5 bg-white flex flex-col justify-center">
+          <img
+            src="/track-image.png"
+            alt="image"
+            className="w-70 h-70 object-cove"
+          />
+          <h3 className="font-semibold text-gray-800 text-sm sm:text-base text-center">
             Course Details
           </h3>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 pl-6">
+
+        <div className="w-70 flex flex-col ml-10 ">
+          <div className="flex items-center w-70 justify-between ">
             <Clock className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
-            <span className="text-gray-600 text-sm sm:text-base ">
-              Duration
+
+            <span className="font-semibold text-sm sm:text-base mb-5">
+              12 weeks
             </span>
           </div>
-          <span className="font-semibold text-sm sm:text-base pr-6">
-            12 weeks
-          </span>
-        </div>
-        <div className="flex items-center justify-between pl-6">
-          <div className="flex items-center space-x-2">
-            <BookOpen className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
-            <span className="text-gray-600 text-sm sm:text-base">Courses</span>
+
+          <div className="flex items-center w-70 justify-between border-t">
+            <div className="flex items-center space-x-2">
+              <GraduationCap className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
+              <span className="text-gray-600 text-sm sm:text-base">
+                Courses
+              </span>
+            </div>
+            <span className="font-semibold text-sm sm:text-base mb-5">4</span>
           </div>
-          <span className="font-semibold text-sm sm:text-base pr-6">4</span>
-        </div>
-        <div className="flex items-center justify-between pl-6">
-          <div className="flex items-center space-x-2">
-            <User className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
-            <span className="text-gray-600 text-sm sm:text-base">
-              Instructor
+
+          <div className="flex items-center w-70 justify-between border-t">
+            <div className="flex items-center space-x-2">
+              <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
+              <span className="text-gray-600 text-sm sm:text-base">Date</span>
+            </div>
+            <span className="font-semibold text-sm sm:text-base mb-5">
+              03/2025
             </span>
           </div>
-          <span className="font-semibold text-sm sm:text-base pr-6">
-            John Doe
-          </span>
-        </div>
-        <div className="flex items-center justify-between pl-6">
-          <div className="flex items-center space-x-2">
-            <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
-            <span className="text-gray-600 text-sm sm:text-base">Date</span>
+
+          <div className="flex flex-col justify-center items-center border-t pt-4 sm:pt-6 mt-4 sm:mt-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-3xl font-semibold ">
+                $350.00
+              </span>
+            </div>
+            <button className="w-70 bg-[#01589A] hover:bg-blue-300 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base cursor-pointer">
+              Enroll
+            </button>
           </div>
-          <span className="font-semibold text-sm sm:text-base pr-6">
-            03/2025
-          </span>
         </div>
-        <div className="flex flex-col justify-center items-center border-t pt-4 sm:pt-6 mt-4 sm:mt-6">
-          <div className="text-center mb-4 sm:mb-6">
-            <span className="text-2xl sm:text-3xl font-bold ">$350.00</span>
-          </div>
-          <button className="w-80 bg-[#01589A] hover:bg-blue-300 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base cursor-pointer">
-            Enroll
-          </button>
-        </div>
-      </div>
-      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:sticky lg:top-6">
-        <div className="space-y-3 sm:space-y-4"></div>
       </div>
     </div>
   );
