@@ -37,7 +37,7 @@ const TracksPage = () => {
   return (
     <div className="bg-[#02589A]">
       <div className=" max-w-7xl mx-auto  text-white p-10 flex justify-center ">
-        <div className="font-bold text-lg">Tracks</div>
+        <div className="text-3xl font-medium">Tracks</div>
       </div>
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto ">
