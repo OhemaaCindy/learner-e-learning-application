@@ -1,5 +1,11 @@
+import NavigationSection from "@/components/tabs";
+
 const Dashbord = () => {
-  return <div>dashbord</div>;
+  return (
+    <div>
+      <NavigationSection />
+    </div>
+  );
 };
 
 export default Dashbord;
