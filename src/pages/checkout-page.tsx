@@ -1,17 +1,11 @@
 import React, { useState, type ReactNode } from "react";
-import {
-  useForm,
-  type UseFormRegister,
-  type FieldErrors,
-  type FieldValues,
-} from "react-hook-form";
+import { useForm, type UseFormRegister } from "react-hook-form";
 import {
   User,
   Mail,
   Book,
   Phone,
   MapPin,
-  CreditCard,
   ChevronRight,
   ChevronDown,
   Accessibility,
