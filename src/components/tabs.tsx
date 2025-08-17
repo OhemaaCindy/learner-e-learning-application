@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LayoutGrid, Settings, FileText } from "lucide-react";
 import LearnerDashboardPage from "./learner-dashboard";
 import { TableDemo } from "./table";
+import SettingsTab from "./setting-tab";
 
 interface NavItem {
   id: string;
@@ -79,7 +80,7 @@ const NavigationSection: React.FC = () => {
         </div>
       </div>
       {activeTab === "dashboard" && <LearnerDashboardPage />}
-      {activeTab === "settings" && <span>settings</span>}
+      {activeTab === "settings" && <SettingsTab />}
       {activeTab === "invoices" && <TableDemo />}
     </>
   );
