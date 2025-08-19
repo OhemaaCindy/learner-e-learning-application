@@ -1,13 +1,10 @@
 import type { Track } from "@/types/track.type";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 interface TrackProps {
   track: Track;
-  // rating: string;
 }
 export const CourseCard = ({ track }: TrackProps) => {
-  console.log("🚀 ~ CourseCard ~ track:", track);
-
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -43,12 +40,12 @@ export const CourseCard = ({ track }: TrackProps) => {
 
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate("/track/:id");
+  const handleNavigation = (id: string) => {
+    navigate(`/track/${id}`);
   };
   return (
-    <Link
-      to={`${track._id}`}
+    <div
+      // to={`${track._id}`}
       className="max-w-sm w-full h-[500px] rounded-lg shadow-md overflow-hidden mx-auto"
     >
       {/* Course Image/Icon Section */}
@@ -91,12 +88,12 @@ export const CourseCard = ({ track }: TrackProps) => {
           {/* Preview Button */}
           <button
             className="w-full bg-[#01589A] hover:bg-blue-400 cursor-pointer text-white py-3 px-4 rounded-md font-medium transition-colors duration-200"
-            onClick={handleNavigation}
+            onClick={() => handleNavigation(track._id)}
           >
             Preview course
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

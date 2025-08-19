@@ -14,17 +14,6 @@ const TracksPage = () => {
     queryFn: allTracks,
   });
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Top Tracks</h1>
-          <ShimmerTrack />
-        </div>
-      </div>
-    );
-  }
-
   const trackOverview = data?.tracks || [];
 
   const filteredTracks = trackOverview.filter((trackname) => {
@@ -55,7 +44,16 @@ const TracksPage = () => {
 
           {/* Page Title */}
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Top Tracks</h1>
-
+          {isLoading && (
+            <div className="min-h-screen bg-gray-50 py-8">
+              <div className="max-w-7xl mx-auto">
+                {/* <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                  Top Tracks
+                </h1> */}
+                <ShimmerTrack />
+              </div>
+            </div>
+          )}
           {!isLoading && filteredTracks && filteredTracks.length === 0 ? (
             <div>No track to show</div>
           ) : (

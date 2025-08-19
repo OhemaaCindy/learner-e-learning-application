@@ -2,8 +2,24 @@ import EnrollSection from "@/components/enroll-section";
 import ExpectationSection from "@/components/expectation-section";
 import SummarySection from "@/components/summarySection";
 import ExploreSection from "@/explore-section";
+import { singleTrack } from "@/services/track-services";
+import type { SingleTrackResponse, Track } from "@/types/track.type";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
 
 export const TrackDetailsPage = () => {
+  const params = useParams();
+  const id = params.id;
+  console.log("🚀 ~ TrackDetailsPage ~ id:", id);
+
+  const { data } = useQuery<SingleTrackResponse, Error>({
+    queryKey: ["get-single-track", id],
+    queryFn: () => singleTrack(id as string),
+  });
+
+  const details = data?.track;
+  console.log("🚀 ~ TrackDetailsPage ~ details:", details);
+
   return (
     //  Parent
     <div className="flex flex-col">
@@ -13,7 +29,7 @@ export const TrackDetailsPage = () => {
         <div className=" w-full flex-2 min-h-[100%] bg-[#02589A] ">
           <div className="h-[50%] w-full xl:w-[82%] ml-auto">
             <div className="  w-full">
-              <SummarySection />
+              <SummarySection details={details as Track} />
             </div>
           </div>
 
@@ -29,7 +45,7 @@ export const TrackDetailsPage = () => {
           <div className="bg-[#02589A]  hidden lg:block h-[50%]"></div>
           <div className="xl:absolute xl:top-3 xl:left-0 ml-auto  flex w-full xl:w-[82%] ">
             <div className="self-start">
-              <EnrollSection />
+              <EnrollSection details={details as Track} />
             </div>
           </div>
         </div>
