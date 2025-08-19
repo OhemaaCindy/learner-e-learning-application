@@ -1,14 +1,14 @@
 import type { AddTrackFormData } from "@/schemas/track-schema";
 import {
   createTrack,
-  deleteTrack,
+  // deleteTrack,
   upateTrack,
   type UpdateTrackProps,
 } from "@/services/track-services";
 import type { AuthErrorRes } from "@/types/auth.type";
 import type {
   AddTrackResponse,
-  DeleteTrackResponse,
+  // DeleteTrackResponse,
   UpdateTrackResponse,
 } from "@/types/track.type";
 // import type { AuthErrorRes } from "@/types/types";
@@ -47,12 +47,12 @@ export const useUpdateTrack = () => {
 //     mutationFn: (id) => deleteTrack(id),
 //   });
 
-export const useDeleteTrack = () => {
-  const queryClient = useQueryClient();
-  return useMutation<DeleteTrackResponse, AuthErrorRes>({
-    mutationFn: (id) => deleteTrack(id),
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get-all-tracks"] });
-    },
-  });
-};
+// export const useDeleteTrack = () => {
+//   const queryClient = useQueryClient();
+//   return useMutation<DeleteTrackResponse, AuthErrorRes>({
+//     mutationFn: (id) => deleteTrack(id),
+//     onSuccess() {
+//       queryClient.invalidateQueries({ queryKey: ["get-all-tracks"] });
+//     },
+//   });
+// };

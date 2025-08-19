@@ -31,6 +31,14 @@ const Navbar: React.FC = () => {
   const handleRoute = () => {
     navigate("/");
   };
+
+  // const { data: userInfo, isLoading } = useQuery<CheckAuthResponse, Error>({
+  //   queryKey: ["get-info"],
+  //   queryFn: checkAuthUser,
+  // });
+
+  // const info = userInfo?.user;
+  // console.log("🚀 ~ Navbar ~ info:", info);
   return (
     <nav className="bg-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

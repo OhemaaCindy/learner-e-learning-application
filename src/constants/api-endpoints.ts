@@ -11,7 +11,7 @@ export const apiEndpoints = {
     resendVerificationToken: "/auth/resend-token",
     logout: "/admin/auth/logout",
     checkAuth: "auth/check-auth",
-    // update-password:"/auth/change-password",
+    updatePassword: "/auth/change-password",
   },
   TRACKS: {
     getAllTracks: "/tracks",
@@ -25,10 +25,10 @@ export const apiEndpoints = {
   //     createInvoice: "/invoices",
   //     updateInvoice: "",
   //   },
-  //   LEARNERS: {
-  //     getAllLearners: "/learners",
-  //     getOneLearner: (id: string) => `/learners/${id}`,
-  //   },
+  LEARNERS: {
+    updateLearner: (id: string) => `/learners/${id}`,
+    // getOneLearner: (id: string) => `/learners/${id}`,
+  },
   //   COURSES: {
   //     getAllCourses: "/courses",
   //     createCourse: "/courses",
