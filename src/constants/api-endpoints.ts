@@ -13,13 +13,13 @@ export const apiEndpoints = {
     checkAuth: "auth/check-auth",
     // update-password:"/auth/change-password",
   },
-  //   TRACKS: {
-  //     getAllTracks: "/tracks",
-  //     getOneTrack: (id: string) => `/tracks/${id}`,
-  //     createTrack: "/tracks",
-  //     updateTrack: (id: string) => `/tracks/${id}`,
-  //     deleteTrack: (id: string) => `/tracks/${id}`,
-  //   },
+  TRACKS: {
+    getAllTracks: "/tracks",
+    getOneTrack: (id: string) => `/tracks/${id}`,
+    createTrack: "/tracks",
+    updateTrack: (id: string) => `/tracks/${id}`,
+    deleteTrack: (id: string) => `/tracks/${id}`,
+  },
   //   INVOICES: {
   //     getAllInvoices: "/invoices",
   //     createInvoice: "/invoices",
