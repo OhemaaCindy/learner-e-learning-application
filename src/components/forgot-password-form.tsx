@@ -5,6 +5,12 @@ import { InputField } from "./inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
 import { Mail } from "lucide-react";
+import { useForgotPasswordAdmin } from "@/hooks/learner-auth-hook";
+import {
+  forgotPasswordSchema,
+  type ForgotPasswordFormData,
+} from "@/schemas/auth-schema";
+import toast from "react-hot-toast";
 
 export function ForgotPasswordForm({
   className,
@@ -12,12 +18,32 @@ export function ForgotPasswordForm({
 }: React.ComponentProps<"div">) {
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors, isSubmitting },
-    // reset,
-  } = useForm({
-    resolver: zodResolver,
+    reset,
+  } = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordSchema),
   });
+
+  const { mutate: requestReset, isPending } = useForgotPasswordAdmin();
+
+  const onSubmit = async (data: ForgotPasswordFormData) => {
+    console.log(data);
+    requestReset(
+      { ...data, baseResetURL: "http://localhost:5173/reset-password" },
+      {
+        onSuccess() {
+          reset();
+          toast.success("Forgot password request sent successfully");
+
+          // navigate("/reset-password");
+        },
+        onError() {
+          toast.error("Failed to send request.Please try again later");
+        },
+      }
+    );
+  };
 
   return (
     <div
@@ -37,7 +63,7 @@ export function ForgotPasswordForm({
             />
           </div>
 
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold w-80 mb-6">
@@ -46,27 +72,29 @@ export function ForgotPasswordForm({
                 <p> Enter your email address to reset your password</p>
               </div>
 
-              <form>
-                <InputField
-                  placeholder="Email"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  // required
-                  iconLeft={<Mail className="w-4 h-4" />}
-                />
+              {/* <form> */}
+              <InputField
+                placeholder="Email"
+                name="email"
+                type="email"
+                register={register}
+                error={errors.email?.message}
+                // required
+                iconLeft={<Mail className="w-4 h-4" />}
+              />
 
-                <div className="pt-4">
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="mb-4 cursor-pointer w-full p-4"
-                  >
-                    {isSubmitting ? "Resetting..." : "Reset Password"}
-                  </Button>
-                </div>
-              </form>
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || isPending}
+                  className="mb-4 cursor-pointer w-full p-4"
+                >
+                  {isSubmitting || isPending
+                    ? "Resetting..."
+                    : "Reset Password"}
+                </Button>
+              </div>
+              {/* </form> */}
             </div>
           </form>
         </CardContent>

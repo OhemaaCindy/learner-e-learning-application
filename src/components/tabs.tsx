@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LayoutGrid, Settings, FileText } from "lucide-react";
 import LearnerDashboardPage from "./learner-dashboard";
-import { TableDemo } from "./table";
+import { InvoiceTable } from "./table";
 import SettingsTab from "./setting-tab";
 
 interface NavItem {
@@ -64,10 +64,9 @@ const NavigationSection: React.FC = () => {
 
   return (
     <>
-      <div className="w-full bg-[#01589A] py-10 flex items-end h-30  ">
+      <div className="w-full bg-[#01589A]  flex items-end h-30  ">
         <div className="container mx-auto  max-w-7xl  bg-white h-11">
-          {" "}
-          <nav className="flex bg-white   items-end ">
+          <nav className="flex bg-white   items-end border-b-1 border-[#01589A]">
             {navItems.map((item) => (
               <NavigationTab
                 key={item.id}
@@ -81,7 +80,7 @@ const NavigationSection: React.FC = () => {
       </div>
       {activeTab === "dashboard" && <LearnerDashboardPage />}
       {activeTab === "settings" && <SettingsTab />}
-      {activeTab === "invoices" && <TableDemo />}
+      {activeTab === "invoices" && <InvoiceTable />}
     </>
   );
 };

@@ -5,6 +5,14 @@ import { InputField } from "./inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "./../../node_modules/@hookform/resolvers/zod/src/zod";
 import { Eye, LockKeyhole, Mail, UserRound } from "lucide-react";
+import {
+  registrationSchema,
+  type RegistrationFormData,
+} from "@/schemas/auth-schema";
+import { useRegisterAdmin } from "@/hooks/learner-auth-hook";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export function RegisterForm({
   className,
@@ -12,12 +20,38 @@ export function RegisterForm({
 }: React.ComponentProps<"div">) {
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors, isSubmitting },
-    // reset,
-  } = useForm({
-    resolver: zodResolver,
+    reset,
+  } = useForm<RegistrationFormData>({
+    resolver: zodResolver(registrationSchema),
   });
+
+  const navigate = useNavigate();
+
+  const {
+    mutate,
+    isPending,
+    error,
+    isError,
+    data: response,
+  } = useRegisterAdmin();
+
+  const onSubmit = (data: RegistrationFormData) => {
+    // console.log("🚀 ~ onSubmit ~ data:", data);
+    mutate(data, {
+      onSuccess(res) {
+        Cookies.set("token", res.token);
+        reset();
+        toast.success("Admin created successfully");
+
+        navigate(`/otp-verification?email=${data.email}`);
+      },
+      onError() {
+        toast.error("Failed to create account");
+      },
+    });
+  };
 
   return (
     <div
@@ -37,7 +71,18 @@ export function RegisterForm({
             />
           </div>
 
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
+            {isError && error && (
+              <ul className="text-rose-500 mt-2 bg-rose-100 border border-rose-500 rounded-lg px-8 py-2 list-disc">
+                {error.errors.map((err, index) => (
+                  <li key={index}>{err.message}</li>
+                ))}
+              </ul>
+            )}
+
+            {response && response.success && (
+              <p className="text-green-600 mt-2">{response.message}</p>
+            )}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold w-80">
@@ -65,69 +110,69 @@ export function RegisterForm({
                   </span>
                 </div>
               </div>
-              <form>
-                <InputField
-                  // label="First Name"
-                  placeholder="First Name"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  // required
-                  iconLeft={<UserRound className="w-4 h-4" />}
-                />
+              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+              <InputField
+                // label="First Name"
+                placeholder="First Name"
+                name="firstName"
+                type="text"
+                register={register}
+                error={errors.firstName?.message}
+                // required
+                iconLeft={<UserRound className="w-4 h-4" />}
+              />
 
-                <InputField
-                  placeholder="Last Name"
-                  // label="Last Name"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  // required
-                  iconLeft={<UserRound className="w-4 h-4" />}
-                />
-                <InputField
-                  placeholder="Email"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  required
-                  iconLeft={<Mail className="w-4 h-4" />}
-                />
+              <InputField
+                placeholder="Last Name"
+                // label="Last Name"
+                name="lastName"
+                type="text"
+                register={register}
+                error={errors.lastName?.message}
+                // required
+                iconLeft={<UserRound className="w-4 h-4" />}
+              />
+              <InputField
+                placeholder="Email"
+                name="email"
+                type="email"
+                register={register}
+                error={errors.email?.message}
+                required
+                iconLeft={<Mail className="w-4 h-4" />}
+              />
 
-                <InputField
-                  placeholder="Password"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  iconLeft={<LockKeyhole className="w-4 h-4" />}
-                  iconRight={<Eye className="w-4 h-4" />}
-                />
+              <InputField
+                placeholder="Password"
+                name="password"
+                type="password"
+                register={register}
+                error={errors.password?.message}
+                iconLeft={<LockKeyhole className="w-4 h-4" />}
+                iconRight={<Eye className="w-4 h-4" />}
+              />
 
-                <InputField
-                  placeholder="Confirm Password"
-                  name="email"
-                  type="email"
-                  register={register}
-                  error={errors.email?.message}
-                  required
-                  iconLeft={<LockKeyhole className="w-4 h-4" />}
-                  iconRight={<Eye className="w-4 h-4" />}
-                />
+              <InputField
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                register={register}
+                error={errors.confirmPassword?.message}
+                required
+                iconLeft={<LockKeyhole className="w-4 h-4" />}
+                iconRight={<Eye className="w-4 h-4" />}
+              />
 
-                <div className="pt-4">
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="mb-4 cursor-pointer w-full p-4"
-                  >
-                    {isSubmitting ? "Signing Up..." : "Sign Up"}
-                  </Button>
-                </div>
-              </form>
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || isPending}
+                  className="mb-4 cursor-pointer w-full p-4"
+                >
+                  {isSubmitting || isPending ? "Signing Up..." : "Sign Up"}
+                </Button>
+              </div>
+              {/* </form> */}
 
               <div className="text-center text-md">
                 Already have create an account ?

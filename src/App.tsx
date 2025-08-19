@@ -23,7 +23,7 @@ function App() {
         { path: "register", element: <SignUpPage /> },
         { path: "otp-verification", element: <OtpVerificationPage /> },
         { path: "forgot-password", element: <ForgotPassword /> },
-        { path: "reset-password", element: <ResetPassword /> },
+        { path: "reset-password/:id", element: <ResetPassword /> },
         { path: "tracks", element: <TracksPage /> },
         { path: "/track/:id", element: <TrackDetailsPage /> },
         { path: "/checkout", element: <CheckoutPage /> },

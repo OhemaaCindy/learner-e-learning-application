@@ -54,13 +54,13 @@ const invoices = [
   },
 ];
 
-export function TableDemo() {
+export function InvoiceTable() {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto ">
       <h1 className="text-2xl font-bold text-gray-900 mb-8 mt-8">
         Past Invoices
       </h1>
-      <Table className="bg-white ">
+      <Table className="bg-white h-full">
         <TableHeader>
           <TableRow>
             <TableHead>#</TableHead>
