@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
 import { checkAuthUser } from "@/services/auth-services";
-import { useQuery } from "@tanstack/react-query";
 import type { CheckAuthResponse } from "@/types/auth.type";
-
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 interface NavLink {
   name: string;
   href: string;
@@ -16,6 +16,7 @@ const Navbar: React.FC = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] =
     useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
@@ -42,18 +43,14 @@ const Navbar: React.FC = () => {
     navigate("/");
   };
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    console.log("Logout clicked");
-  };
-
   const handlePortal = () => {
     navigate("/dashboard");
   };
-
+  // only run when there is a user
   const { data: userInfo, isLoading } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
     queryFn: checkAuthUser,
+    enabled: !!Cookies.get("token"),
   });
 
   const info = userInfo?.user;
@@ -79,6 +76,13 @@ const Navbar: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    queryClient.invalidateQueries({ queryKey: ["get-info"] });
+
+    navigate("/");
+  };
 
   return (
     <nav className="bg-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8">

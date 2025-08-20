@@ -1,10 +1,10 @@
 export interface UpdateLearnerResponse {
   success: boolean;
   message: string;
-  learner: Learner;
+  user: User;
 }
 
-export interface Learner {
+export interface User {
   _id: string;
   firstName: string;
   lastName: string;
@@ -17,5 +17,6 @@ export interface Learner {
   __v: number;
   contact: string;
   description: string;
+  disabled: boolean;
   location: string;
 }

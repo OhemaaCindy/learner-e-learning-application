@@ -26,7 +26,7 @@ export const apiEndpoints = {
   //     updateInvoice: "",
   //   },
   LEARNERS: {
-    updateLearner: (id: string) => `/learners/${id}`,
+    updateProfile: "/auth/update",
     // getOneLearner: (id: string) => `/learners/${id}`,
   },
   //   COURSES: {

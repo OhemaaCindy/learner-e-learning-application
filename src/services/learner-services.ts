@@ -1,38 +1,41 @@
 import { apiEndpoints } from "@/constants/api-endpoints";
 import { axiosClient } from "@/lib/axios";
-import type { UpdateLearnerFormData } from "@/schemas/learner-schema";
+import type {
+  UpdateLearnerFormData,
+  // UpdatePasswordFormData,
+} from "@/schemas/learner-schema";
 import type { AuthErrorRes } from "@/types/auth.type";
 import type { UpdateLearnerResponse } from "@/types/learner.type";
 import axios from "axios";
 
-export interface UpdateLearnerProps {
-  id: string;
-  payload: UpdateLearnerFormData;
-}
-export const upateLearner = async ({
-  id,
-  payload,
-}: UpdateLearnerProps): Promise<UpdateLearnerResponse> => {
+export const upateLearner = async (
+  payload: UpdateLearnerFormData
+): Promise<UpdateLearnerResponse> => {
   console.log("🔥 ~ updateLearner ~ payload:", payload);
+  // const { firstName, lastName, contact, location, disabled, descripton } = payload;
 
   const formData = new FormData();
-  console.log("🚀 ~ upateLearner ~ formData:", formData);
 
   // Append only non-empty string values
-  if (payload.firstName) formData.append("name", payload.firstName);
-  if (payload.lastName) formData.append("price", payload.lastName);
-  if (payload.contact) formData.append("instructor", payload.contact);
-  if (payload.location) formData.append("duration", payload.location);
+  if (payload.firstName) formData.append("firstName", payload.firstName);
+  if (payload.lastName) formData.append("lastName", payload.lastName);
+  if (payload.contact) formData.append("contact", payload.contact);
+  if (payload.location) formData.append("location", payload.location);
+  formData.append("disabled", String(payload.disabled));
+  if (payload.description) formData.append("description", payload.description);
+
+  // formData.append("descripton", payload.description);
 
   // Append image only if it's a File instance
-  if (payload.image instanceof File) {
-    formData.append("image", payload.image);
+  if (payload.profileImage instanceof File) {
+    formData.append("profileImage", payload.profileImage);
   }
+  console.log("🚀 ~ upateLearner ~ formData:", formData);
 
   try {
     console.log("🚀 ~ upateLearner ~ formData:", formData);
     const response = await axiosClient.put<UpdateLearnerResponse>(
-      apiEndpoints.LEARNERS.updateLearner(id),
+      apiEndpoints.LEARNERS.updateProfile,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -50,3 +53,28 @@ export const upateLearner = async ({
     } as AuthErrorRes;
   }
 };
+
+// export const upatePassword = async ({
+//   payload,
+// }: UpdatePasswordFormData): Promise<UpdateLearnerResponse> => {
+//   try {
+//     console.log("🚀 ~ upateLearner ~ payload:", payload);
+//     const response = await axiosClient.post<UpdateLearnerResponse>(
+//       apiEndpoints.AUTH.updatePassword,
+//       payload
+//       // {
+//       //   headers: { "Content-Type": "multipart/form-data" },
+//       // }
+//     );
+//     return response.data;
+//   } catch (error) {
+//     // console.log("🚀 ~ createTrack ~ error:", error);
+//     if (axios.isAxiosError(error) && error.response) {
+//       throw error.response.data as AuthErrorRes;
+//     }
+//     throw {
+//       success: false,
+//       errors: [{ message: "Something went wrong" }],
+//     } as AuthErrorRes;
+//   }
+// };
