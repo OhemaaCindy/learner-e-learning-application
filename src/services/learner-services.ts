@@ -5,7 +5,11 @@ import type {
   // UpdatePasswordFormData,
 } from "@/schemas/learner-schema";
 import type { AuthErrorRes } from "@/types/auth.type";
-import type { UpdateLearnerResponse } from "@/types/learner.type";
+import type {
+  EnollmentResponse,
+  EnollmentType,
+  UpdateLearnerResponse,
+} from "@/types/learner.type";
 import axios from "axios";
 
 export const upateLearner = async (
@@ -44,6 +48,29 @@ export const upateLearner = async (
     return response.data;
   } catch (error) {
     // console.log("🚀 ~ createTrack ~ error:", error);
+    if (axios.isAxiosError(error) && error.response) {
+      throw error.response.data as AuthErrorRes;
+    }
+    throw {
+      success: false,
+      errors: [{ message: "Something went wrong" }],
+    } as AuthErrorRes;
+  }
+};
+
+export const trackEnrollment = async (
+  payload: EnollmentType
+): Promise<EnollmentResponse> => {
+  // console.log("🔥 ~ enrollLearner ~ payload:", payload);
+
+  try {
+    // console.log("🚀 ~ upateLearner ~ payload:", payload);
+    const response = await axiosClient.post<EnollmentResponse>(
+      apiEndpoints.LEARNERS.trackEnrollment,
+      payload
+    );
+    return response.data;
+  } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       throw error.response.data as AuthErrorRes;
     }

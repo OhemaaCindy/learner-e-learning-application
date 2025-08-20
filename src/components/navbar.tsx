@@ -79,7 +79,8 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     Cookies.remove("token");
-    queryClient.invalidateQueries({ queryKey: ["get-info"] });
+    queryClient.removeQueries({ queryKey: ["get-info"] });
+    queryClient.clear();
 
     navigate("/");
   };
@@ -91,7 +92,7 @@ const Navbar: React.FC = () => {
           <img
             src="/logo.png"
             alt="logo"
-            className="w-20 h-8 cursor-pointer"
+            className="w-30 h-10 cursor-pointer"
             onClick={handleRoute}
           />
           {/* Desktop Navigation */}

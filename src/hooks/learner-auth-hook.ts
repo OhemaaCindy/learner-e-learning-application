@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   forgotPasswordAdmin,
   loginAdmin,
+  logout,
   // logout,
   registerAdmin,
   resendOtp,
@@ -15,6 +16,7 @@ import type {
   ForgotPasswordResponseType,
   LoginPayloadType,
   LoginResponseType,
+  LogoutResponse,
   // LogoutResponse,
   RegisterResponse,
   RegisterType,
@@ -23,6 +25,8 @@ import type {
   VerifyEmailPayloadType,
   VerifyEmailResponseType,
 } from "@/types/auth.type";
+import { trackEnrollment } from "@/services/learner-services";
+import type { EnollmentResponse, EnollmentType } from "@/types/learner.type";
 
 export const useRegisterAdmin = () =>
   useMutation<RegisterResponse, AuthErrorRes, RegisterType>({
@@ -64,7 +68,12 @@ export const useResendOtpAdmin = () =>
     mutationFn: resendOtp,
   });
 
-// export const uselogoutAdmin = () =>
-//   useMutation<LogoutResponse, AuthErrorRes>({
-//     mutationFn: logout,
-//   });
+export const useLearnerEnrollment = () =>
+  useMutation<EnollmentResponse, AuthErrorRes, EnollmentType>({
+    mutationFn: trackEnrollment,
+  });
+
+export const useLogoutAdmin = () =>
+  useMutation<LogoutResponse, AuthErrorRes>({
+    mutationFn: logout,
+  });

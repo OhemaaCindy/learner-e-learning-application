@@ -27,6 +27,7 @@ export const apiEndpoints = {
   //   },
   LEARNERS: {
     updateProfile: "/auth/update",
+    trackEnrollment: "/enrollments",
     // getOneLearner: (id: string) => `/learners/${id}`,
   },
   //   COURSES: {

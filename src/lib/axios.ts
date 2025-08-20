@@ -31,8 +31,21 @@ axiosClient.interceptors.response.use(
   function (error) {
     if (error.response) {
       if (error.response.status === 401) {
-        Cookies.remove("token");
-        window.location.href = "/";
+        const profileConpletionError = error.response.data[0]
+          .toLowerCase()
+          .includes("complete your profile");
+
+        // Remove token for all 401 error except incomplet profile error
+        if (!profileConpletionError) {
+          Cookies.remove("token");
+          window.location.href = "/";
+        }
+        // Cookies.remove("token");
+        // window.location.href = "/";
+        console.log({
+          msg: "========================\ntoken removed and navigated to the home page",
+        });
+        console.log("🚀 ~ error.response.data:", error.response.data[0]);
       } else if (error.response.status === 500) {
         return Promise.reject(
           new Error("Server error. Please try again later.")

@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 export const TrackDetailsPage = () => {
   const params = useParams();
   const id = params.id;
-  console.log("🚀 ~ TrackDetailsPage ~ id:", id);
+  // console.log("🚀 ~ TrackDetailsPage ~ id:", id);
 
   const { data } = useQuery<SingleTrackResponse, Error>({
     queryKey: ["get-single-track", id],
@@ -18,7 +18,7 @@ export const TrackDetailsPage = () => {
   });
 
   const details = data?.track;
-  console.log("🚀 ~ TrackDetailsPage ~ details:", details);
+  // console.log("🚀 ~ TrackDetailsPage ~ details:", details);
 
   return (
     //  Parent
@@ -45,7 +45,7 @@ export const TrackDetailsPage = () => {
           <div className="bg-[#02589A]  hidden lg:block h-[50%]"></div>
           <div className="xl:absolute xl:top-3 xl:left-0 ml-auto  flex w-full xl:w-[82%] ">
             <div className="self-start">
-              <EnrollSection details={details as Track} />
+              <EnrollSection details={details as Track} id={id as string} />
             </div>
           </div>
         </div>

@@ -22,11 +22,14 @@ export const UpdateLearnerTypeSchema = z.object({
   location: z.string().optional(),
   contact: z
     .string()
-    .regex(/^0?\d{9}$/, {
-      message: "Contact must be 10 digits",
-    })
+    // .regex(/^0?\d{9}$/, {
+    //   message: "Contact must be 10 digits",
+    // })
     .transform((val) => {
-      if (val.startsWith("0")) {
+      console.log("🚀 ~ val:", val);
+      if (val.startsWith("+233")) {
+        return val;
+      } else if (val.startsWith("0")) {
         return "+233" + val.slice(1);
       }
       return "+233" + val;
