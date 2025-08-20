@@ -3,6 +3,7 @@ import {
   forgotPasswordAdmin,
   loginAdmin,
   logout,
+  // logout,
   registerAdmin,
   resendOtp,
   resetAdminPassword,
@@ -16,6 +17,7 @@ import type {
   LoginPayloadType,
   LoginResponseType,
   LogoutResponse,
+  // LogoutResponse,
   RegisterResponse,
   RegisterType,
   ResendOtpType,
@@ -23,6 +25,8 @@ import type {
   VerifyEmailPayloadType,
   VerifyEmailResponseType,
 } from "@/types/auth.type";
+import { trackEnrollment } from "@/services/learner-services";
+import type { EnollmentResponse, EnollmentType } from "@/types/learner.type";
 
 export const useRegisterAdmin = () =>
   useMutation<RegisterResponse, AuthErrorRes, RegisterType>({
@@ -64,7 +68,12 @@ export const useResendOtpAdmin = () =>
     mutationFn: resendOtp,
   });
 
-export const uselogoutAdmin = () =>
+export const useLearnerEnrollment = () =>
+  useMutation<EnollmentResponse, AuthErrorRes, EnollmentType>({
+    mutationFn: trackEnrollment,
+  });
+
+export const useLogoutAdmin = () =>
   useMutation<LogoutResponse, AuthErrorRes>({
     mutationFn: logout,
   });

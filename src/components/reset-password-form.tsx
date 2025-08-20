@@ -117,7 +117,7 @@ export function ResetPasswordForm({
                 <Button
                   type="submit"
                   disabled={isSubmitting || isPending}
-                  className="mb-4 cursor-pointer w-full p-4"
+                  className="mb-4 cursor-pointer w-full p-4 bg-[#01589A] hover:bg-blue-100"
                 >
                   {isSubmitting || isPending
                     ? "Resetting..."

@@ -11,24 +11,25 @@ export const apiEndpoints = {
     resendVerificationToken: "/auth/resend-token",
     logout: "/admin/auth/logout",
     checkAuth: "auth/check-auth",
-    // update-password:"/auth/change-password",
+    updatePassword: "/auth/change-password",
   },
-  //   TRACKS: {
-  //     getAllTracks: "/tracks",
-  //     getOneTrack: (id: string) => `/tracks/${id}`,
-  //     createTrack: "/tracks",
-  //     updateTrack: (id: string) => `/tracks/${id}`,
-  //     deleteTrack: (id: string) => `/tracks/${id}`,
-  //   },
+  TRACKS: {
+    getAllTracks: "/tracks",
+    getOneTrack: (id: string) => `/tracks/${id}`,
+    createTrack: "/tracks",
+    updateTrack: (id: string) => `/tracks/${id}`,
+    deleteTrack: (id: string) => `/tracks/${id}`,
+  },
   //   INVOICES: {
   //     getAllInvoices: "/invoices",
   //     createInvoice: "/invoices",
   //     updateInvoice: "",
   //   },
-  //   LEARNERS: {
-  //     getAllLearners: "/learners",
-  //     getOneLearner: (id: string) => `/learners/${id}`,
-  //   },
+  LEARNERS: {
+    updateProfile: "/auth/update",
+    trackEnrollment: "/enrollments",
+    // getOneLearner: (id: string) => `/learners/${id}`,
+  },
   //   COURSES: {
   //     getAllCourses: "/courses",
   //     createCourse: "/courses",

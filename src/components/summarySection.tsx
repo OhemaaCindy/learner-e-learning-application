@@ -1,6 +1,8 @@
+import type { Track } from "@/types/track.type";
 import { Star } from "lucide-react";
 
-const SummarySection = () => {
+const SummarySection = ({ details }: { details: Track }) => {
+  // console.log("🚀 ~ SummarySection ~ details:", details);
   return (
     <>
       <div className=" text-white py-3 sm:py-4">
@@ -13,7 +15,7 @@ const SummarySection = () => {
             Tracks
           </a>
           <span className="text-blue-300 flex-shrink-0">›</span>
-          <span className="font-medium truncate">Software Development</span>
+          <span className="font-medium truncate"> {details?.name}</span>
         </nav>
       </div>
 
@@ -23,19 +25,16 @@ const SummarySection = () => {
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
             <div className="flex flex-col ">
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-center md:text-start">
-                Software Development Track
+                {details?.name}
               </h1>
               <p className="text-base sm:text-lg text-blue-100 mb-6 sm:mb-8 leading-relaxed text-center md:text-start">
-                Unlock your potential with comprehensive training in modern
-                software development. Become a Full-Stack Web Developer with a
-                single comprehensive course covering HTML, CSS, JavaScript,
-                Node, React, PostgreSQL, Web3, and DApps.
+                {details?.description}
               </p>
 
               <div className="self-center md:self-start flex flex-col sm:flex-row sm:items-center sm:space-x-8 space-y-4 sm:space-y-0 text-sm">
                 <div className="flex items-center gap-4 md:gap-2 self-center md:flex-col md:items-start">
                   <p className="text-blue-200">Instructor</p>
-                  <p className="font-semibold">John Doe</p>
+                  <p className="font-semibold">{details?.instructor}</p>
                 </div>
                 <div className="flex items-center gap-4 md:gap-2 self-center md:flex-col md:items-start">
                   <p className="text-blue-200">Enrolled students</p>

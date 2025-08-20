@@ -87,7 +87,7 @@ export function ForgotPasswordForm({
                 <Button
                   type="submit"
                   disabled={isSubmitting || isPending}
-                  className="mb-4 cursor-pointer w-full p-4"
+                  className="mb-4 cursor-pointer w-full p-4 bg-[#01589A]"
                 >
                   {isSubmitting || isPending
                     ? "Resetting..."
