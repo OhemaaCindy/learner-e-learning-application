@@ -19,7 +19,6 @@ export const UpdateLearnerTypeSchema = z.object({
   image: fileSchema.optional().or(z.literal(null)), // Make optional or required based on your needs
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-
   location: z.string().optional(),
   contact: z.string().optional(),
 });

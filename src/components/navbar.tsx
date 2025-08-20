@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
+import { checkAuthUser } from "@/services/auth-services";
+import { useQuery } from "@tanstack/react-query";
+import type { CheckAuthResponse } from "@/types/auth.type";
 
 interface NavLink {
   name: string;
@@ -10,6 +13,9 @@ interface NavLink {
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] =
+    useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
@@ -18,12 +24,16 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
-    // navigate("/login");
+  };
+
+  const toggleProfileDropdown = (): void => {
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
   const handleLogin = () => {
     navigate("/login");
   };
+
   const handleRegister = () => {
     navigate("/register");
   };
@@ -32,13 +42,44 @@ const Navbar: React.FC = () => {
     navigate("/");
   };
 
-  // const { data: userInfo, isLoading } = useQuery<CheckAuthResponse, Error>({
-  //   queryKey: ["get-info"],
-  //   queryFn: checkAuthUser,
-  // });
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log("Logout clicked");
+  };
 
-  // const info = userInfo?.user;
-  // console.log("🚀 ~ Navbar ~ info:", info);
+  const handlePortal = () => {
+    navigate("/dashboard");
+  };
+
+  const { data: userInfo, isLoading } = useQuery<CheckAuthResponse, Error>({
+    queryKey: ["get-info"],
+    queryFn: checkAuthUser,
+  });
+
+  const info = userInfo?.user;
+  const isAuthenticated = !!info;
+
+  function fallbackName(info: { firstName: string; lastName: string }): string {
+    return `${info.firstName.split("")[0]}${info.lastName.split("")[0]}`;
+  }
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav className="bg-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -64,26 +105,125 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
-            <button
-              className="flex items-center space-x-2 text-[#01589A] border border-[#01589A] hover:bg-blue-50 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer"
-              onClick={handleLogin}
-            >
-              <span>Login</span>
-              <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
-            </button>
-            <button
-              className="flex items-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm cursor-pointer"
-              onClick={handleRegister}
-            >
-              <span>sign up</span>
-              <img
-                src="/white-arrow.png"
-                alt="arrow"
-                className="h-4 w-4 text-[#ffffff]"
-              />
-            </button>
+          {/* Desktop Auth Section */}
+          <div className="hidden md:flex items-center">
+            {isAuthenticated ? (
+              /* Authenticated User Profile */
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={toggleProfileDropdown}
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                >
+                  {/* Avatar */}
+                  <div className="relative">
+                    <div className="w-10 h-10 bg-[#01589A] rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-medium">
+                        {isLoading
+                          ? ""
+                          : fallbackName({
+                              firstName: info?.firstName ?? "",
+                              lastName: info?.lastName ?? "",
+                            })}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* User Info */}
+                  <div className="flex flex-col items-start">
+                    <span className="text-sm font-medium text-gray-900">
+                      {isLoading
+                        ? "Loading..."
+                        : `${info?.firstName} ${info?.lastName}`}
+                    </span>
+                    <span className="text-xs text-gray-500 truncate max-w-32">
+                      {isLoading ? "" : info?.email}
+                    </span>
+                  </div>
+
+                  {/* Dropdown Arrow */}
+                  <ChevronDown
+                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                      isProfileDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Profile Dropdown */}
+                {isProfileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-[#01589A] rounded-full flex items-center justify-center">
+                          <span className="text-white font-medium">
+                            {isLoading
+                              ? ""
+                              : fallbackName({
+                                  firstName: info?.firstName ?? "",
+                                  lastName: info?.lastName ?? "",
+                                })}
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-gray-900">
+                            {isLoading
+                              ? "Loading..."
+                              : `${info?.firstName} ${info?.lastName}`}
+                          </p>
+                          <p className="text-xs text-gray-500 truncate">
+                            {isLoading ? "" : info?.email}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="py-1">
+                      <button
+                        onClick={() => {
+                          handlePortal();
+                          setIsProfileDropdownOpen(false);
+                        }}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        <User className="w-4 h-4 mr-3 text-[#01589A]" />
+                        Portal
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsProfileDropdownOpen(false);
+                        }}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        <LogOut className="w-4 h-4 mr-3 text-gray-500" />
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Non-authenticated Auth Buttons */
+              <div className="flex items-center space-x-3">
+                <button
+                  className="flex items-center space-x-2 text-[#01589A] border border-[#01589A] hover:bg-blue-50 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer"
+                  onClick={handleLogin}
+                >
+                  <span>Login</span>
+                  <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
+                </button>
+                <button
+                  className="flex items-center space-x-2 bg-[#01589A] text-white hover:bg-[#015777] px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm cursor-pointer"
+                  onClick={handleRegister}
+                >
+                  <span>sign up</span>
+                  <img
+                    src="/white-arrow.png"
+                    alt="arrow"
+                    className="h-4 w-4 text-[#ffffff]"
+                  />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -118,33 +258,85 @@ const Navbar: React.FC = () => {
               key={link.name}
               href={link.href}
               className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
-              // onClick={() => setIsMenuOpen(false)}
+              onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
 
-          {/* Mobile Auth Buttons */}
-          <div className="pt-4 pb-2 space-y-3">
-            <button
-              className="w-full flex items-center justify-center space-x-2 text-[#01589A] border border-[#01589A]  hover:bg-blue-50 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
-              onClick={handleLogin}
-            >
-              <span>Login</span>
-              <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
-            </button>
-            <button
-              className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#01589A] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
-              onClick={handleRegister}
-            >
-              <span>sign up</span>
-              <img
-                src="/white-arrow.png"
-                alt="arrow"
-                className="h-4 w-4 text-[#ffffff]"
-              />
-            </button>
-          </div>
+          {/* Mobile Auth/Profile Section */}
+          {isAuthenticated ? (
+            /* Mobile Profile Section */
+            <div className="pt-4 pb-2 border-t border-gray-100 mt-2">
+              <div className="flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-md mb-3">
+                <div className="w-12 h-12 bg-[#01589A] rounded-full flex items-center justify-center">
+                  <span className="text-white font-medium">
+                    {isLoading
+                      ? ""
+                      : fallbackName({
+                          firstName: info?.firstName ?? "",
+                          lastName: info?.lastName ?? "",
+                        })}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900">
+                    {isLoading
+                      ? "Loading..."
+                      : `${info?.firstName} ${info?.lastName}`}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    {isLoading ? "" : info?.email}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <button
+                  className="w-full flex items-center space-x-2 text-[#01589A] border border-[#01589A] hover:bg-blue-50 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
+                  onClick={() => {
+                    handlePortal();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <User className="w-4 h-4" />
+                  <span>Portal</span>
+                </button>
+                <button
+                  className="w-full flex items-center space-x-2 text-gray-700 border border-gray-300 hover:bg-gray-50 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Mobile Auth Buttons */
+            <div className="pt-4 pb-2 space-y-3">
+              <button
+                className="w-full flex items-center justify-center space-x-2 text-[#01589A] border border-[#01589A]  hover:bg-blue-50 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
+                onClick={handleLogin}
+              >
+                <span>Login</span>
+                <img src="/blue-arrow.png" alt="arrow" className="h-4 w-4" />
+              </button>
+              <button
+                className="w-full flex items-center justify-center space-x-2 bg-[#01589A] text-white hover:bg-[#01589A] px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 shadow-sm"
+                onClick={handleRegister}
+              >
+                <span>sign up</span>
+                <img
+                  src="/white-arrow.png"
+                  alt="arrow"
+                  className="h-4 w-4 text-[#ffffff]"
+                />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

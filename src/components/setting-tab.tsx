@@ -220,14 +220,14 @@ export default function SettingsTab() {
       location: info?.location || "",
     },
   });
-  const id = info?._id;
   const selectedImage = watch("image");
-
+  const id = info?._id;
+  console.log("🚀 ~ SettingsTab ~ id:", id);
   const { mutate: updateLearner, isPending } = useUpdateLearner();
 
   const onSubmit = async (data: UpdateLearnerFormData) => {
     updateLearner(
-      { ...data, id: id as string },
+      { payload: data, id: id as string },
       {
         onSuccess(res) {
           console.log("🚀 ~ onSuccess ~ res:", res);
@@ -255,8 +255,8 @@ export default function SettingsTab() {
         />
 
         <div className="w-4/6">
-          {/* Profile Form */}
           <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Profile Form */}
             <div className="bg-[#F5F5F5] rounded-sm shadow-sm p-6 sm:p-8 mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
                 Profile

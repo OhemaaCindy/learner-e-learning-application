@@ -16,6 +16,7 @@ export const upateLearner = async ({
   console.log("🔥 ~ updateLearner ~ payload:", payload);
 
   const formData = new FormData();
+  console.log("🚀 ~ upateLearner ~ formData:", formData);
 
   // Append only non-empty string values
   if (payload.firstName) formData.append("name", payload.firstName);
@@ -29,6 +30,7 @@ export const upateLearner = async ({
   }
 
   try {
+    console.log("🚀 ~ upateLearner ~ formData:", formData);
     const response = await axiosClient.put<UpdateLearnerResponse>(
       apiEndpoints.LEARNERS.updateLearner(id),
       formData,
