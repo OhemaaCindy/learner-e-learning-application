@@ -1,8 +1,14 @@
 import { useLearnerEnrollment } from "@/hooks/learner-auth-hook";
 import type { Track } from "@/types/track.type";
-import { Calendar, Clock, GraduationCap, User } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  GraduationCap,
+  LoaderCircle,
+  User,
+} from "lucide-react";
 import toast from "react-hot-toast";
-import { redirect } from "react-router";
+// import { redirect } from "react-router";
 // import { useNavigate } from "react-router";
 
 interface EnrollmentProps {
@@ -15,7 +21,7 @@ const EnrollSection = ({ details, id }: EnrollmentProps) => {
 
   const {
     mutate: enrollLearner,
-    // isPending,
+    isPending,
     error,
     isError,
     // data,
@@ -103,8 +109,15 @@ const EnrollSection = ({ details, id }: EnrollmentProps) => {
           <button
             className="w-70 bg-[#01589A] hover:bg-blue-300 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base cursor-pointer"
             onClick={handleEnrollment}
+            disabled={isPending}
           >
-            Enroll
+            {isPending ? (
+              <span className="animate-spin text-white flex items-center justify-center">
+                <LoaderCircle />{" "}
+              </span>
+            ) : (
+              "Enroll"
+            )}
           </button>
         </div>
         {isError && error && (

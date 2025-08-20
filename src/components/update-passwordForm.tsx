@@ -8,12 +8,16 @@ import {
 } from "@/schemas/learner-schema";
 import { useForm } from "react-hook-form";
 // import { useUpdateLearner } from "@/hooks/update-learner-hook";
-import { useLogoutAdmin } from "@/hooks/learner-auth-hook";
+// import { useLogoutAdmin } from "@/hooks/learner-auth-hook";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UpdatePasswordForm = () => {
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
   const {
     register,
     handleSubmit,
@@ -39,14 +43,20 @@ const UpdatePasswordForm = () => {
     // });
   };
 
-  const { mutate } = useLogoutAdmin();
+  // const { mutate } = useLogoutAdmin();
 
+  // const handleLogout = () => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  //   mutate(), Cookies.remove("token");
+  //   navigate("/");
+  // };
   const handleLogout = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    mutate(), Cookies.remove("token");
+    Cookies.remove("token");
+    queryClient.removeQueries({ queryKey: ["get-info"] });
+    queryClient.clear();
+
     navigate("/");
   };
-
   return (
     <>
       {/* Change Password Form */}
