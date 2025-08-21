@@ -29,7 +29,21 @@ export default function SettingsTab() {
   const info = userInfo?.user;
 
   const profileCompletionCheck =
-    !info?.disabled || !info?.contact || !info?.description || !info?.location;
+    info?.disabled === undefined ||
+    !info?.contact ||
+    !info?.description ||
+    !info?.location;
+
+  // console.log({
+  //   disabled: info?.disabled,
+  //   contact: info?.contact,
+  //   description: info?.description,
+  //   location: info?.location,
+  // });
+  // console.log(
+  //   "🚀 ~ SettingsTab ~ profileCompletionCheck:",
+  //   profileCompletionCheck
+  // );
   // console.log("🚀 ~ SettingsTab ~ info:", info);
   const {
     register,
@@ -67,8 +81,16 @@ export default function SettingsTab() {
   };
 
   return (
-    <>
-      {profileCompletionCheck && <h1>banner</h1>}
+    <div className=" min-h-screen py-6 px-4 sm:px-6 lg:px-8 mt-8">
+      {profileCompletionCheck && (
+        <div className="flex items-center justify-center ">
+          <ul className="  text-[#77C053] mt-2 bg-green-50 border border-[#58e611] rounded-lg  py-2 list-disc w-120 px-15">
+            <span>
+              Please Complete Your Profile To Be Able To Enroll In A Track
+            </span>
+          </ul>
+        </div>
+      )}
 
       <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 mt-8">
         <div className="flex justify-between max-w-7xl mx-auto">
@@ -183,6 +205,6 @@ export default function SettingsTab() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

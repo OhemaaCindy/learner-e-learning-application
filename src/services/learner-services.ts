@@ -8,6 +8,7 @@ import type { AuthErrorRes } from "@/types/auth.type";
 import type {
   EnollmentResponse,
   EnollmentType,
+  InvoiceResponse,
   UpdateLearnerResponse,
 } from "@/types/learner.type";
 import axios from "axios";
@@ -81,6 +82,23 @@ export const trackEnrollment = async (
   }
 };
 
+export const allInvoices = async (): Promise<InvoiceResponse> => {
+  try {
+    const response = await axiosClient.get<InvoiceResponse>(
+      apiEndpoints.INVOICES.getInvoices
+    );
+    return response.data;
+  } catch (error) {
+    console.log("🚀 ~ allInvoices ~ error:", error);
+    if (axios.isAxiosError(error) && error.response) {
+      throw error.response.data as AuthErrorRes;
+    }
+    throw {
+      success: false,
+      errors: [{ message: "Something went wrong" }],
+    } as AuthErrorRes;
+  }
+};
 // export const upatePassword = async ({
 //   payload,
 // }: UpdatePasswordFormData): Promise<UpdateLearnerResponse> => {

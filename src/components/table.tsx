@@ -7,54 +7,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { allInvoices } from "@/services/learner-services";
+import type { InvoiceResponse } from "@/types/learner.type";
+import { useQuery } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    date: "12-06-2002",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    date: "12-06-2002",
-  },
-];
+import { format } from "date-fns";
 
 export function InvoiceTable() {
+  const { data } = useQuery<InvoiceResponse, Error>({
+    queryKey: ["get-all-invoices"],
+    queryFn: allInvoices,
+  });
+
+  const invoiceList = data?.invoices || [];
+  // console.log("🚀 ~ InvoiceTable ~ invoiceList:", invoiceList);
+
   return (
     <div className="max-w-7xl mx-auto ">
       <h1 className="text-2xl font-bold text-gray-900 mb-8 mt-8">
@@ -70,12 +37,12 @@ export function InvoiceTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.date}</TableCell>
-              <TableCell>{invoice.totalAmount}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
+          {invoiceList.map((invoice) => (
+            <TableRow key={invoice._id}>
+              <TableCell className="font-medium">{invoice._id}</TableCell>
+              <TableCell> {format(new Date(invoice.dueDate), "PPP")}</TableCell>
+              <TableCell>${invoice.amount}</TableCell>
+              <TableCell>{invoice.status}</TableCell>
               <TableCell>
                 <Eye />
               </TableCell>

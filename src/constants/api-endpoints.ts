@@ -20,11 +20,11 @@ export const apiEndpoints = {
     updateTrack: (id: string) => `/tracks/${id}`,
     deleteTrack: (id: string) => `/tracks/${id}`,
   },
-  //   INVOICES: {
-  //     getAllInvoices: "/invoices",
-  //     createInvoice: "/invoices",
-  //     updateInvoice: "",
-  //   },
+  INVOICES: {
+    getInvoices: "/invoices",
+    // createInvoice: "/invoices",
+    // updateInvoice: "",
+  },
   LEARNERS: {
     updateProfile: "/auth/update",
     trackEnrollment: "/enrollments",
