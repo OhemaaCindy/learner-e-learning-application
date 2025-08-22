@@ -12,7 +12,9 @@ const EnrollSection = ({ details, id }: EnrollmentProps) => {
   const navigate = useNavigate();
 
   const handleNaviation = () => {
-    navigate(`/checkout?id=${id}&track=${details.name}`);
+    navigate(
+      `/checkout?id=${id}&track=${details.name}&amount=${details.price}`
+    );
   };
 
   return (

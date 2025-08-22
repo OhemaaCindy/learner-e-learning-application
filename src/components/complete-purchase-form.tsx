@@ -9,7 +9,11 @@ import { ChevronRight, LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const CompletePurhase = ({ trackId }: { trackId: string }) => {
+interface PurchaseProps {
+  trackId: string;
+  trackAmount: number;
+}
+const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
   const {
     register,
     handleSubmit,
@@ -65,7 +69,7 @@ const CompletePurhase = ({ trackId }: { trackId: string }) => {
       <div className=" rounded-lg shadow-sm border border-gray-200 p-6 sticky top-4  ">
         <div className="text-center mb-6 ">
           <div className="text-3xl font-bold text-gray-900 mb-2">
-            $ 100.00 USD
+            $ {trackAmount} USD
           </div>
         </div>
 

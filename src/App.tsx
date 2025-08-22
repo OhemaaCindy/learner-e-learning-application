@@ -12,6 +12,7 @@ import { TrackDetailsPage } from "./pages/track-details-page";
 import CheckoutPage from "./pages/checkout-page";
 import Dashbord from "./pages/dashbord";
 import Protectedlayout from "./pages/layouts/auth-layout";
+import NotFoundPage from "./pages/notFoundPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -36,6 +37,7 @@ function App() {
             { path: "dashboard", element: <Dashbord /> },
           ],
         },
+        { path: "*", element: <NotFoundPage /> },
       ],
     },
   ]);

@@ -35,7 +35,7 @@ const CheckoutPage = () => {
   const [searchParams] = useSearchParams();
   const trackId = searchParams.get("id");
   const trackName = searchParams.get("track");
-  // console.log(trackId);
+  const trackAmount = searchParams.get("amount");
 
   const { data: userInfo } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
@@ -143,15 +143,6 @@ const CheckoutPage = () => {
                     iconLeft={<Book className="h-5 w-5" />}
                   />
 
-                  {/* <DropdownField
-                    name="gender"
-                    placeholder="Gender"
-                    options={genderOptions}
-                    register={register}
-                    error={errors.gender?.message}
-                    iconLeft={<User className="h-5 w-5" />}
-                  /> */}
-
                   <InputField
                     name="contact"
                     type="tel"
@@ -227,7 +218,10 @@ const CheckoutPage = () => {
               Complete payment
             </h2>
 
-            <CompletePurhase trackId={trackId as string} />
+            <CompletePurhase
+              trackId={trackId as string}
+              trackAmount={trackAmount as number}
+            />
           </div>
         </div>
       </div>

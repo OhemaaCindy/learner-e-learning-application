@@ -63,7 +63,7 @@ export function OtpVerificationForm({
           reset();
           toast.success("Otp verified successfully");
 
-          navigate("/dashboard");
+          navigate("/");
         },
         onError() {
           toast.error("Failed to send otp.Please try again later");
