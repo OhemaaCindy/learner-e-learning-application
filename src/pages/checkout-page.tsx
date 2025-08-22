@@ -1,172 +1,84 @@
-import React, { useState, type ReactNode } from "react";
-import { useForm, type UseFormRegister } from "react-hook-form";
+import React from "react";
+import { useForm } from "react-hook-form";
 import {
   User,
   Mail,
   Book,
   Phone,
   MapPin,
-  ChevronRight,
-  ChevronDown,
-  Accessibility,
+  // ChevronRight,
+  // ChevronDown,
+  // Accessibility,
+  Plus,
 } from "lucide-react";
 import { InputField } from "@/components/inputs";
-
-// Form data interface
-interface CheckoutFormData {
-  name: string;
-  email: string;
-  subject: string;
-  gender: string;
-  phone: string;
-  location: string;
-  paymentMethod: string;
-  description: string;
-  amount: string;
-}
+import { useQuery } from "@tanstack/react-query";
+import type { CheckAuthResponse } from "@/types/auth.type";
+import { checkAuthUser } from "@/services/auth-services";
+// import Cookies from "js-cookie";
+import {
+  UpdateLearnerTypeSchema,
+  type UpdateLearnerFormData,
+} from "@/schemas/learner-schema";
+import { useUpdateLearner } from "@/hooks/update-learner-hook";
+import toast from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
+import CompletePurhase from "@/components/complete-purchase-form";
+import { useSearchParams } from "react-router";
 
 // Custom utility function for className merging
 const cn = (...classes: (string | undefined | null | false)[]): string => {
   return classes.filter(Boolean).join(" ");
 };
 
-// DropdownField component props interface
-interface DropdownFieldProps {
-  label?: string;
-  name: keyof CheckoutFormData;
-  options: string[];
-  placeholder: string;
-  register: UseFormRegister<CheckoutFormData>;
-  error?: string;
-  required?: boolean;
-  iconLeft?: ReactNode;
-}
+const CheckoutPage = () => {
+  const [searchParams] = useSearchParams();
+  const trackId = searchParams.get("id");
 
-// Custom Dropdown component
-const DropdownField: React.FC<DropdownFieldProps> = ({
-  label,
-  name,
-  options,
-  placeholder,
-  register,
-  error,
-  required = false,
-  iconLeft,
-}) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  console.log(trackId);
 
-  const handleSelect = (value: string): void => {
-    setSelectedValue(value);
-    setIsOpen(false);
-    // Update the form value
-    const event = {
-      target: { name, value },
-    } as React.ChangeEvent<HTMLInputElement>;
-    register(name).onChange(event);
-  };
+  const { data: userInfo } = useQuery<CheckAuthResponse, Error>({
+    queryKey: ["get-info"],
+    queryFn: checkAuthUser,
+    // enabled: !!Cookies.get("token"),
+  });
 
-  return (
-    <div className="mb-4 w-full">
-      {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      )}
+  const info = userInfo?.user;
 
-      <div className="relative">
-        {iconLeft && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-            {iconLeft}
-          </span>
-        )}
+  const profileCompletionCheck =
+    info?.disabled === undefined ||
+    !info?.contact ||
+    !info?.description ||
+    !info?.location;
 
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className={cn(
-            "w-full px-3 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-transparent text-left flex items-center justify-between",
-            iconLeft && "pl-10",
-            "border-gray-200 bg-gray-50",
-            error && "border-red-500 bg-red-50"
-          )}
-        >
-          <span className={selectedValue ? "text-gray-900" : "text-gray-500"}>
-            {selectedValue || placeholder}
-          </span>
-          <ChevronRight
-            className={`h-5 w-5 text-gray-400 transition-transform ${
-              isOpen ? "rotate-90" : ""
-            }`}
-          />
-        </button>
-
-        {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-            {options.map((option: string) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => handleSelect(option)}
-                className="w-full px-4 py-3 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg"
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <input {...register(name)} type="hidden" value={selectedValue} />
-      </div>
-
-      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
-    </div>
-  );
-};
-
-const CheckoutPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
-    setValue,
-  } = useForm<CheckoutFormData>({
-    defaultValues: {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      subject: "Data science",
-      gender: "",
-      phone: "",
-      location: "",
-      paymentMethod: "",
-      description: "",
-      amount: "100",
+    formState: { errors, isSubmitting },
+  } = useForm<UpdateLearnerFormData>({
+    resolver: zodResolver(UpdateLearnerTypeSchema),
+    values: {
+      firstName: info?.firstName || "",
+      lastName: info?.lastName || "",
+      contact: info?.contact || "",
+      location: info?.location || "",
+      disabled: info?.disabled,
+      description: info?.description || "",
     },
   });
 
-  const [showAmountDropdown, setShowAmountDropdown] = useState<boolean>(false);
+  const { mutate: updateLearner, isPending } = useUpdateLearner();
 
-  const genderOptions: string[] = [
-    "Male",
-    "Female",
-    "Other",
-    "Prefer not to say",
-  ];
-  const disabilityStatus: string[] = ["yes", "no"];
-  const amountOptions: string[] = ["50", "100", "200", "350", "500"];
-
-  const watchedAmount: string = watch("amount");
-
-  const onSubmit = (data: CheckoutFormData): void => {
-    console.log("Form submitted:", data);
-    // Handle form submission here
-  };
-
-  const handleAmountSelect = (amount: string): void => {
-    setValue("amount", amount);
-    setShowAmountDropdown(false);
+  const onSubmit = async (data: UpdateLearnerFormData) => {
+    updateLearner(data, {
+      onSuccess(res) {
+        console.log("🚀 ~ onSuccess ~ res:", res);
+        toast.success("Profile updated successfully");
+      },
+      onError() {
+        toast.error("Failed to update profile");
+      },
+    });
   };
 
   return (
@@ -180,21 +92,35 @@ const CheckoutPage: React.FC = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {profileCompletionCheck && (
+          <div className="flex items-center justify-center ">
+            <ul className="  text-[#77C053] mt-2 bg-green-50 border border-[#58e611] rounded-lg  py-2 list-disc w-120 px-15">
+              <span>
+                Please Complete Your Profile To Be Able To Enroll In A Track
+              </span>
+            </ul>
+          </div>
+        )}
+        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-40 w-full bg-white">
+          <form onSubmit={handleSubmit(onSubmit)}>
             {/* Form Section */}
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                {/* <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                  Complete payment
-                </h2> */}
-
+            <div className="lg:col-span-2  w-2xl">
+              <div className=" rounded-lg shadow-sm border border-gray-200 p-6  w-full">
                 <div className="space-y-2">
                   <InputField
-                    name="name"
-                    placeholder="Full name"
+                    name="firstName"
+                    placeholder="First name"
                     register={register}
-                    error={errors.name?.message}
+                    error={errors.firstName?.message}
+                    required
+                    iconLeft={<User className="h-5 w-5" />}
+                  />
+
+                  <InputField
+                    name="lastName"
+                    placeholder="Last name"
+                    register={register}
+                    error={errors.lastName?.message}
                     required
                     iconLeft={<User className="h-5 w-5" />}
                   />
@@ -202,9 +128,9 @@ const CheckoutPage: React.FC = () => {
                   <InputField
                     name="email"
                     type="email"
-                    placeholder="Email address"
+                    placeholder={info?.email}
                     register={register}
-                    error={errors.email?.message}
+                    // error={errors?.message}
                     required
                     iconLeft={<Mail className="h-5 w-5" />}
                   />
@@ -217,21 +143,21 @@ const CheckoutPage: React.FC = () => {
                     iconLeft={<Book className="h-5 w-5" />}
                   />
 
-                  <DropdownField
+                  {/* <DropdownField
                     name="gender"
                     placeholder="Gender"
                     options={genderOptions}
                     register={register}
                     error={errors.gender?.message}
                     iconLeft={<User className="h-5 w-5" />}
-                  />
+                  /> */}
 
                   <InputField
-                    name="phone"
+                    name="contact"
                     type="tel"
-                    placeholder="Phone"
+                    placeholder="Contact"
                     register={register}
-                    error={errors.phone?.message}
+                    error={errors.contact?.message}
                     iconLeft={<Phone className="h-5 w-5" />}
                   />
 
@@ -243,14 +169,25 @@ const CheckoutPage: React.FC = () => {
                     iconLeft={<MapPin className="h-5 w-5" />}
                   />
 
-                  <DropdownField
-                    name="paymentMethod"
-                    placeholder="Do you have any disability?"
-                    options={disabilityStatus}
-                    register={register}
-                    error={errors.paymentMethod?.message}
-                    iconLeft={<Accessibility className="h-5 w-5" />}
-                  />
+                  <div className="mb-4 w-full">
+                    <select
+                      {...register("disabled")}
+                      name="disabled"
+                      className={cn(
+                        "w-full h-10   border rounded-md shadow-sm overflow-y-auto ",
+                        errors.disabled && "border-red-500 bg-red-50"
+                      )}
+                    >
+                      <option value="">Do you have disability?</option>
+                      <option value="true">true</option>
+                      <option value="false">false</option>
+                    </select>
+                    {errors.disabled && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.disabled.message}
+                      </p>
+                    )}
+                  </div>
 
                   {/* Description */}
                   <div className="mb-4 w-full">
@@ -268,69 +205,31 @@ const CheckoutPage: React.FC = () => {
                         {errors.description.message}
                       </p>
                     )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Payment Summary */}
-            <div className="lg:col-span-1">
-              <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                Complete payment
-              </h2>
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-4">
-                <div className="text-center mb-6">
-                  <div className="text-3xl font-bold text-gray-900 mb-2">
-                    $ {watchedAmount || "100"}.00 USD
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Select amount
-                  </label>
-                  <div className="relative">
                     <button
-                      type="button"
-                      onClick={() => setShowAmountDropdown(!showAmountDropdown)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-left flex items-center justify-between bg-gray-50"
+                      type="submit"
+                      disabled={isSubmitting || isPending}
+                      className="bg-[#01589A] hover:bg-blue-200 cursor-pointer text-white px-6 py-3 rounded-sm font-medium flex items-center justify-center gap-2 transition-colors order-2 sm:order-1 mb-6 disabled:opacity-50 disabled:cursor-not-allowed mt-4"
                     >
-                      <span>{watchedAmount || "100"}</span>
-                      <ChevronDown
-                        className={`h-5 w-5 text-gray-400 transition-transform ${
-                          showAmountDropdown ? "rotate-180" : ""
-                        }`}
-                      />
+                      {isSubmitting || isPending
+                        ? "Saving..."
+                        : "Update Profile"}
+                      <Plus className="w-5 h-5" />
                     </button>
-                    {showAmountDropdown && (
-                      <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                        {amountOptions.map((option: string) => (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => handleAmountSelect(option)}
-                            className="w-full px-4 py-3 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg"
-                          >
-                            ${option}
-                          </button>
-                        ))}
-                      </div>
-                    )}
                   </div>
-                  <input {...register("amount")} type="hidden" />
                 </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#01589A] hover:bg-blue-300 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  Complete my purchase
-                  <ChevronRight className="h-5 w-5" />
-                </button>
               </div>
             </div>
+          </form>
+
+          {/* Payment Summary */}
+          <div className="lg:col-span-1 ">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6">
+              Complete payment
+            </h2>
+
+            <CompletePurhase trackId={trackId as string} />
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

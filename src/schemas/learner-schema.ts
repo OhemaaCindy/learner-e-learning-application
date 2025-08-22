@@ -58,3 +58,9 @@ export const UpdatePasswordTypeSchema = z
   });
 
 export type UpdatePasswordFormData = z.infer<typeof UpdatePasswordTypeSchema>;
+
+export const CheckoutSchema = z.object({
+  amount: z.number(),
+});
+
+export type CheckoutFormData = z.infer<typeof CheckoutSchema>;

@@ -1,15 +1,7 @@
-import { useLearnerEnrollment } from "@/hooks/learner-auth-hook";
 import type { Track } from "@/types/track.type";
-import {
-  Calendar,
-  Clock,
-  GraduationCap,
-  LoaderCircle,
-  User,
-} from "lucide-react";
-import toast from "react-hot-toast";
-// import { redirect } from "react-router";
-// import { useNavigate } from "react-router";
+import { Calendar, Clock, GraduationCap, User } from "lucide-react";
+
+import { useNavigate } from "react-router";
 
 interface EnrollmentProps {
   details: Track;
@@ -17,34 +9,10 @@ interface EnrollmentProps {
 }
 
 const EnrollSection = ({ details, id }: EnrollmentProps) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const {
-    mutate: enrollLearner,
-    isPending,
-    error,
-    isError,
-    // data,
-  } = useLearnerEnrollment();
-
-  const handleEnrollment = () => {
-    const enrollmentDetails = {
-      track: id as string,
-      paystackCallbackUrl: "http://localhost:5173/checkout",
-      amount: details.price,
-    };
-    console.log("🚀 ~ handleEnrollment ~ data:", enrollmentDetails);
-    enrollLearner(enrollmentDetails, {
-      onSuccess(res) {
-        console.log("🚀 ~ onSuccess ~ res:", res);
-        toast.success("Enrollment successful");
-        // redirect(res.transactionUrl);
-        window.location.href = res.transactionUrl;
-      },
-      onError() {
-        toast.error("Failed to enroll.Please try again later");
-      },
-    });
+  const handleNaviation = () => {
+    navigate(`/checkout?id=${id}`);
   };
 
   return (
@@ -84,9 +52,6 @@ const EnrollSection = ({ details, id }: EnrollmentProps) => {
             <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
             <span className="text-gray-600 text-sm sm:text-base">Date</span>
           </div>
-          {/* <span className="font-semibold text-sm sm:text-base ">
-            {details?.createdAt}
-          </span> */}
         </div>
 
         <div className="flex items-center justify-between border-t p-2">
@@ -106,27 +71,14 @@ const EnrollSection = ({ details, id }: EnrollmentProps) => {
               ${details?.price}
             </span>
           </div>
+
           <button
             className="w-70 bg-[#01589A] hover:bg-blue-300 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base cursor-pointer"
-            onClick={handleEnrollment}
-            disabled={isPending}
+            onClick={handleNaviation}
           >
-            {isPending ? (
-              <span className="animate-spin text-white flex items-center justify-center">
-                <LoaderCircle />{" "}
-              </span>
-            ) : (
-              "Enroll"
-            )}
+            Enroll
           </button>
         </div>
-        {isError && error && (
-          <ul className="text-rose-500 mt-2 bg-rose-100 border border-rose-500 rounded-lg px-8 py-2 list-disc">
-            {error.errors.map((err, index) => (
-              <li key={index}>{err.message}</li>
-            ))}
-          </ul>
-        )}
       </div>
     </div>
   );
