@@ -39,7 +39,7 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
       },
       {
         onSuccess: (res) => {
-          console.log("🚀 ~ onSuccess ~ res:", res);
+          // console.log("🚀 ~ onSuccess ~ res:", res);
           toast.success("Enrollment successful");
           window.location.href = res.transactionUrl;
         },

@@ -10,7 +10,7 @@ import {
 import { allInvoices } from "@/services/learner-services";
 import type { InvoiceResponse } from "@/types/learner.type";
 import { useQuery } from "@tanstack/react-query";
-import { Eye } from "lucide-react";
+// import { Eye } from "lucide-react";
 import { format } from "date-fns";
 
 export function InvoiceTable() {
@@ -46,9 +46,9 @@ export function InvoiceTable() {
                 </TableCell>
                 <TableCell>${invoice.amount}</TableCell>
                 <TableCell>{invoice.status}</TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <Eye />
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))
           ) : (

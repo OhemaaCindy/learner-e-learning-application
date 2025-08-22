@@ -20,7 +20,7 @@ export function OtpVerificationForm({
 
   const [searchParams] = useSearchParams();
   const emailQuery = searchParams.get("email");
-  console.log("🚀 ~ OtpVerificationForm ~ emailQuery:", emailQuery);
+  // console.log("🚀 ~ OtpVerificationForm ~ emailQuery:", emailQuery);
 
   const { mutate: handleOtpResend, isError, error, data } = useResendOtpAdmin();
 

@@ -10,6 +10,7 @@ import {
   // ChevronDown,
   // Accessibility,
   Plus,
+  TriangleAlert,
 } from "lucide-react";
 import { InputField } from "@/components/inputs";
 import { useQuery } from "@tanstack/react-query";
@@ -94,10 +95,13 @@ const CheckoutPage = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {profileCompletionCheck && (
           <div className="flex items-center justify-center ">
-            <ul className="  text-[#77C053] mt-2 bg-green-50 border border-[#58e611] rounded-lg  py-2 list-disc w-120 px-15">
-              <span>
-                Please Complete Your Profile To Be Able To Enroll In A Track
-              </span>
+            <ul className="   border  border-rose-500 text-rose-500 mt-2 mb-8 bg-rose-100 rounded-lg  py-2 list-disc w-120 px-15">
+              <div className="flex gap-4 items-center ">
+                <TriangleAlert />
+                <span>
+                  Please Complete Your Profile To Be Able To Enroll In A Track
+                </span>
+              </div>
             </ul>
           </div>
         )}
