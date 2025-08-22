@@ -11,6 +11,7 @@ import TracksPage from "./pages/tracks-page";
 import { TrackDetailsPage } from "./pages/track-details-page";
 import CheckoutPage from "./pages/checkout-page";
 import Dashbord from "./pages/dashbord";
+import Protectedlayout from "./pages/layouts/auth-layout";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,9 +26,16 @@ function App() {
         { path: "forgot-password", element: <ForgotPassword /> },
         { path: "reset-password/:id", element: <ResetPassword /> },
         { path: "tracks", element: <TracksPage /> },
-        { path: "/track/:id", element: <TrackDetailsPage /> },
-        { path: "/checkout", element: <CheckoutPage /> },
-        { path: "/dashboard", element: <Dashbord /> },
+        { path: "track/:id", element: <TrackDetailsPage /> },
+
+        {
+          path: "/",
+          element: <Protectedlayout />,
+          children: [
+            { path: "checkout", element: <CheckoutPage /> },
+            { path: "dashboard", element: <Dashbord /> },
+          ],
+        },
       ],
     },
   ]);

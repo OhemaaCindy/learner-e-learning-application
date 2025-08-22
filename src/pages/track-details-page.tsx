@@ -10,7 +10,6 @@ import { useParams } from "react-router";
 export const TrackDetailsPage = () => {
   const params = useParams();
   const id = params.id;
-  // console.log("🚀 ~ TrackDetailsPage ~ id:", id);
 
   const { data } = useQuery<SingleTrackResponse, Error>({
     queryKey: ["get-single-track", id],
@@ -18,7 +17,6 @@ export const TrackDetailsPage = () => {
   });
 
   const details = data?.track;
-  // console.log("🚀 ~ TrackDetailsPage ~ details:", details);
 
   return (
     //  Parent
@@ -58,5 +56,3 @@ export const TrackDetailsPage = () => {
     </div>
   );
 };
-
-// const Comp1 = () => {};

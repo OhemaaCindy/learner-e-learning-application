@@ -34,8 +34,8 @@ const cn = (...classes: (string | undefined | null | false)[]): string => {
 const CheckoutPage = () => {
   const [searchParams] = useSearchParams();
   const trackId = searchParams.get("id");
-
-  console.log(trackId);
+  const trackName = searchParams.get("track");
+  // console.log(trackId);
 
   const { data: userInfo } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
@@ -136,10 +136,10 @@ const CheckoutPage = () => {
                   />
 
                   <InputField
-                    name="subject"
-                    placeholder="Subject"
+                    name="trackName"
+                    placeholder={trackName as string}
                     register={register}
-                    error={errors.subject?.message}
+                    // error={errors.subject?.message}
                     iconLeft={<Book className="h-5 w-5" />}
                   />
 

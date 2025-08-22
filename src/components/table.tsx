@@ -37,17 +37,23 @@ export function InvoiceTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoiceList.map((invoice) => (
-            <TableRow key={invoice._id}>
-              <TableCell className="font-medium">{invoice._id}</TableCell>
-              <TableCell> {format(new Date(invoice.dueDate), "PPP")}</TableCell>
-              <TableCell>${invoice.amount}</TableCell>
-              <TableCell>{invoice.status}</TableCell>
-              <TableCell>
-                <Eye />
-              </TableCell>
-            </TableRow>
-          ))}
+          {invoiceList ? (
+            invoiceList.map((invoice) => (
+              <TableRow key={invoice._id}>
+                <TableCell className="font-medium">{invoice._id}</TableCell>
+                <TableCell>
+                  {format(new Date(invoice.dueDate), "PPP")}
+                </TableCell>
+                <TableCell>${invoice.amount}</TableCell>
+                <TableCell>{invoice.status}</TableCell>
+                <TableCell>
+                  <Eye />
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <span>No record to show</span>
+          )}
         </TableBody>
         <TableFooter></TableFooter>
       </Table>

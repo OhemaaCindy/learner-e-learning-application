@@ -138,7 +138,7 @@ export function OtpVerificationForm({
                 <Button
                   type="submit"
                   disabled={isSubmitting || isPending}
-                  className="mb-4 cursor-pointer w-full p-4 bg-[#01589A]"
+                  className="mb-4 cursor-pointer w-full p-4 bg-[#01589A] hover:bg-blue-200"
                   onClick={handleSubmit(onSubmit)}
                 >
                   {isSubmitting || isPending ? "Verying..." : "Verify"}
