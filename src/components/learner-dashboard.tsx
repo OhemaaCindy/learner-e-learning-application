@@ -1,7 +1,7 @@
-import { CourseCard } from "@/components/track-cards";
-import { Monitor, BarChart3, Cloud, Search } from "lucide-react";
+// import { CourseCard } from "@/components/track-cards";
+import { Monitor, BarChart3, Cloud } from "lucide-react";
 import { EnrolledCourseCard } from "./enrolled-course-cards";
-import ExploreSection from "@/explore-section";
+// import ExploreSection from "@/explore-section";
 import RateSection from "./rate-section";
 
 const LearnerDashboardPage = () => {

@@ -34,7 +34,7 @@ export const UpdateLearnerTypeSchema = z.object({
       }
       return "+233" + val;
     }),
-  disabled: z.enum(["true", "false"]).transform((val) => val === "true"),
+  disabled: z.boolean(),
   description: z.string().min(1, "Please enter description").optional(),
 });
 

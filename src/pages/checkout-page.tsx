@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import {
   User,
@@ -63,7 +62,7 @@ const CheckoutPage = () => {
       lastName: info?.lastName || "",
       contact: info?.contact || "",
       location: info?.location || "",
-      disabled: info?.disabled,
+      disabled: info?.disabled || false,
       description: info?.description || "",
     },
   });
@@ -72,8 +71,8 @@ const CheckoutPage = () => {
 
   const onSubmit = async (data: UpdateLearnerFormData) => {
     updateLearner(data, {
-      onSuccess(res) {
-        console.log("🚀 ~ onSuccess ~ res:", res);
+      onSuccess() {
+        // console.log("🚀 ~ onSuccess ~ res:", res);
         toast.success("Profile updated successfully");
       },
       onError() {
@@ -179,7 +178,7 @@ const CheckoutPage = () => {
                     </select>
                     {errors.disabled && (
                       <p className="text-red-500 text-sm mt-1">
-                        {errors.disabled.message}
+                        {errors.disabled?.message}
                       </p>
                     )}
                   </div>
@@ -224,7 +223,7 @@ const CheckoutPage = () => {
 
             <CompletePurhase
               trackId={trackId as string}
-              trackAmount={trackAmount as number}
+              trackAmount={trackAmount as unknown as number}
             />
           </div>
         </div>

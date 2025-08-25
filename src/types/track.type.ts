@@ -17,7 +17,7 @@ export interface Track {
   updatedAt: Date;
   __v: number;
   courses: Course[];
-  ratings: any[];
+  ratings: unknown;
   id: string;
 }
 
@@ -65,7 +65,7 @@ export interface Track {
   updatedAt: Date;
   __v: number;
   courses: Course[];
-  ratings: any[];
+  ratings: unknown;
   id: string;
 }
 

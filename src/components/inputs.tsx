@@ -7,6 +7,8 @@ interface InputFieldProps {
   name: string;
   type?: string;
   placeholder?: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
   error?: string;
   required?: boolean;

@@ -1,13 +1,21 @@
-import { Monitor } from "lucide-react";
+import { Monitor, type LucideIcon } from "lucide-react";
+
+interface EnrolledCourseCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  bgColor: string;
+  iconColor: string;
+}
 
 export const EnrolledCourseCard = ({
-  icon: Icon,
+  // icon: Icon,
   title,
   description,
 
   bgColor,
-  iconColor,
-}) => {
+}: // iconColor,
+EnrolledCourseCardProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       {/* Course Image/Icon Section */}
