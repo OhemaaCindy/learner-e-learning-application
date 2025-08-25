@@ -33,7 +33,7 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
   const onSubmit = (data: CheckoutFormData) => {
     checkoutLearner(
       {
-        paystackCallbackUrl: "http://localhost:5173/checkout",
+        paystackCallbackUrl: `${import.meta.env.BASE_URL}/checkout`,
         track: trackId,
         ...data,
       },
