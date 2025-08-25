@@ -20,7 +20,6 @@ export function InvoiceTable() {
   });
 
   const invoiceList = data?.invoices || [];
-  // console.log("🚀 ~ InvoiceTable ~ invoiceList:", invoiceList);
 
   return (
     <div className="max-w-7xl mx-auto ">
