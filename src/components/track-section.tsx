@@ -34,6 +34,7 @@ const TrackSection = () => {
   if (isLoading) {
     return <TrackSectionShimmer />;
   }
+
   const trackDetails = data?.tracks.slice(0, 4) || [];
   console.log("🚀 ~ TracksPage ~ trackDetails:", trackDetails);
 
