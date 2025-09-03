@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { checkAuthUser } from "@/services/auth-services";
 import type { CheckAuthResponse } from "@/types/auth.type";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -99,13 +99,13 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className="text-gray-700 hover:text-[#01589A] px-3 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

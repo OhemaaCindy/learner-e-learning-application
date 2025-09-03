@@ -19,6 +19,7 @@ const TracksPage = () => {
   const filteredTracks = trackOverview.filter((trackname) => {
     return trackname?.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
   return (
     <div className="bg-[#02589A]">
       <div className=" max-w-7xl mx-auto  text-white p-10 flex justify-center ">
