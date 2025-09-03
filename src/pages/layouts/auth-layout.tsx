@@ -31,6 +31,10 @@ const Protectedlayout = () => {
     enabled: !!Cookies.get("token"),
   });
 
+  console.log("Query data:", data); // Add this
+  console.log("Query loading:", isLoading); // Add this
+  console.log("Query error:", isError);
+
   if (!Cookies.get("token")) {
     return <Navigate to="/" />;
   }
