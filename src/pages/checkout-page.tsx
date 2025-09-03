@@ -12,7 +12,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { InputField } from "@/components/inputs";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { CheckAuthResponse } from "@/types/auth.type";
 import { checkAuthUser } from "@/services/auth-services";
 // import Cookies from "js-cookie";
@@ -36,6 +36,7 @@ const CheckoutPage = () => {
   const trackId = searchParams.get("id");
   const trackName = searchParams.get("track");
   const trackAmount = searchParams.get("amount");
+  const queryClient = useQueryClient();
 
   const { data: userInfo } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
@@ -72,6 +73,8 @@ const CheckoutPage = () => {
   const onSubmit = async (data: UpdateLearnerFormData) => {
     updateLearner(data, {
       onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ["get-info"] });
+
         // console.log("🚀 ~ onSuccess ~ res:", res);
         toast.success("Profile updated successfully");
       },

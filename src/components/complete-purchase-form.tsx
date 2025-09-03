@@ -31,9 +31,17 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
   } = useLearnerEnrollment();
 
   const onSubmit = (data: CheckoutFormData) => {
+    // console.log(
+    //   "🚀 ~ onSubmit ~ `${import.meta.env.BASE_URL}/checkout`:",
+    //   `${import.meta.env.BASE_URL}/checkout`
+    // );
+    // console.log(
+    //   "🚀 ~ onSubmit ~ `${import.meta.env.VITE_CLIENT_URL}/checkout`:",
+    //   `${import.meta.env.VITE_CLIENT_URL}/checkout`
+    // );
     checkoutLearner(
       {
-        paystackCallbackUrl: `${import.meta.env.BASE_URL}/checkout`,
+        paystackCallbackUrl: `${import.meta.env.VITE_CLIENT_URL}/checkout`,
         track: trackId,
         ...data,
       },
