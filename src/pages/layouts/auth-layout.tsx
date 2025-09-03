@@ -28,7 +28,7 @@ const Protectedlayout = () => {
   const { data, isLoading, isError } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
     queryFn: checkAuthUser,
-    enabled: !!Cookies.get("token"),
+    // enabled: !!Cookies.get("token"),
   });
 
   console.log("Query data:", data); // Add this
