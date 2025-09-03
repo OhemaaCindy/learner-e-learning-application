@@ -25,11 +25,14 @@ import Cookies from "js-cookie";
 import { Navigate, Outlet } from "react-router";
 
 const Protectedlayout = () => {
+  const token = Cookies.get("token");
+
   const { data, isLoading, isError } = useQuery<CheckAuthResponse, Error>({
     queryKey: ["get-info"],
     queryFn: checkAuthUser,
     // enabled: !!Cookies.get("token"),
   });
+  console.log("🍪 Token from cookie:", token);
 
   console.log("Query data:", data); // Add this
   console.log("Query loading:", isLoading); // Add this
