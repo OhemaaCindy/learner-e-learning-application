@@ -52,7 +52,7 @@ export const CourseCard = ({ track }: TrackProps) => {
       <div className="h-60 flex items-center justify-center relative">
         <div className="relative w-full h-full">
           <img
-            src={track.image}
+            src={track?.image}
             alt="track image"
             className="h-full w-full object-cover"
           />
@@ -63,10 +63,10 @@ export const CourseCard = ({ track }: TrackProps) => {
       <div className="p-6 flex flex-col justify-between h-[calc(500px-240px)]">
         <div>
           <h3 className="text-xl font-semibold text-gray-800 mb-3">
-            {track.name}
+            {track?.name}
           </h3>
           <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
-            {track.description}
+            {track?.description}
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export const CourseCard = ({ track }: TrackProps) => {
             <div className="text-right">
               <span className="text-gray-500 text-sm">Price: </span>
               <span className="text-gray-800 font-semibold">
-                ${track.price}
+                ${track?.price}
               </span>
             </div>
           </div>
