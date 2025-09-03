@@ -42,7 +42,7 @@ export function LoginForm({
         reset();
         toast.success("Login successful");
 
-        navigate("/");
+        navigate("/dashboard");
       },
       onError() {
         toast.error("Failed to login.Please try again later");
