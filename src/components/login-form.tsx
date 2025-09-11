@@ -38,16 +38,13 @@ export function LoginForm({
     console.log(data);
     loginUser(data, {
       onSuccess(res) {
-        console.log("📝 Full login response:", res);
-        console.log("🎫 Token from response:", res.token);
-        console.log("🎫 Response keys:", Object.keys(res));
+        // console.log("📝 Full login response:", res);
         Cookies.set("token", res.token);
-        console.log("🚀 ~ onSuccess ~ res.token:", res.token);
 
-        console.log(
-          "🍪 Cookie immediately after setting:",
-          Cookies.get("token")
-        );
+        // console.log(
+        //   "🍪 Cookie immediately after setting:",
+        //   Cookies.get("token")
+        // );
         reset();
         toast.success("Login successful");
 

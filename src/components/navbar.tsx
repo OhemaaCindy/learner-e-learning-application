@@ -78,12 +78,16 @@ const Navbar: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
-    alert("logging out");
+    // console.log("🍪 Cookie immediately after logout:", Cookies.get("token"));
+    navigate("/");
+
+    Cookies.set("token", "");
     Cookies.remove("token");
+
     queryClient.removeQueries({ queryKey: ["get-info"] });
     queryClient.clear();
 
-    navigate("/");
+    // console.log("🍪🍪 Cookie immediately after logout:", Cookies.get("token"));
   };
 
   return (
