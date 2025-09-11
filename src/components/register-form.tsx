@@ -42,6 +42,7 @@ export function RegisterForm({
     mutate(data, {
       onSuccess(res) {
         Cookies.set("token", res.token);
+        console.log("🚀 ~ onSuccess ~  res.token:", res.token);
         reset();
         toast.success("Admin created successfully");
 
