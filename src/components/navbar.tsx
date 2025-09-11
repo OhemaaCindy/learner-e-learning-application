@@ -78,6 +78,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
+    alert("logging out");
     Cookies.remove("token");
     queryClient.removeQueries({ queryKey: ["get-info"] });
     queryClient.clear();
