@@ -41,11 +41,13 @@ export const registerAdmin = async (
 export const loginAdmin = async (
   payload: LoginPayloadType
 ): Promise<LoginResponseType> => {
+  console.log("🚀 ~ loginAdmin ~ payload:", payload);
   try {
     const response = await axiosClient.post<LoginResponseType>(
       apiEndpoints.AUTH.login,
       payload
     );
+    console.log("🚀 ~ loginAdmin ~ response:", response);
     return response.data;
   } catch (error) {
     console.log(error);
