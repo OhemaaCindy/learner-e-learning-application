@@ -41,7 +41,7 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
     // );
     checkoutLearner(
       {
-        paystackCallbackUrl: `${import.meta.env.VITE_CLIENT_URL}/checkout`,
+        paystackCallbackUrl: `${import.meta.env.VITE_CLIENT_URL}/dashboard`,
         track: trackId,
         ...data,
       },
