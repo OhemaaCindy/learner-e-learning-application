@@ -118,3 +118,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 2;
+  background-color: #01589a; /* underline color */
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::before {
+  width: 50%;
+}
