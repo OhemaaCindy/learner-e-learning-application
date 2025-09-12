@@ -38,13 +38,8 @@ export function LoginForm({
     console.log(data);
     loginUser(data, {
       onSuccess(res) {
-        // console.log("📝 Full login response:", res);
         Cookies.set("token", res.token);
 
-        // console.log(
-        //   "🍪 Cookie immediately after setting:",
-        //   Cookies.get("token")
-        // );
         reset();
         toast.success("Login successful");
 
@@ -92,7 +87,7 @@ export function LoginForm({
                 <div className=" rounded-lg">
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
+                    // disabled={isSubmitting}
                     variant="secondary"
                     className=" cursor-pointer w-full p-4 border-1 border-[#01589A]"
                   >

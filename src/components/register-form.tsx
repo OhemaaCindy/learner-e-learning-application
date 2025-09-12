@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { InputField } from "./inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "./../../node_modules/@hookform/resolvers/zod/src/zod";
-import { Eye, LockKeyhole, Mail, UserRound } from "lucide-react";
+import { LockKeyhole, Mail, UserRound } from "lucide-react";
 import {
   registrationSchema,
   type RegistrationFormData,
@@ -150,7 +150,6 @@ export function RegisterForm({
                 register={register}
                 error={errors.password?.message}
                 iconLeft={<LockKeyhole className="w-4 h-4" />}
-                iconRight={<Eye className="w-4 h-4" />}
               />
 
               <InputField
@@ -161,7 +160,6 @@ export function RegisterForm({
                 error={errors.confirmPassword?.message}
                 required
                 iconLeft={<LockKeyhole className="w-4 h-4" />}
-                iconRight={<Eye className="w-4 h-4" />}
               />
 
               <div className="pt-4">
