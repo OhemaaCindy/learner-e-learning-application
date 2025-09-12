@@ -12,8 +12,12 @@ const HomePage = () => {
       <TrackSection />
       <TechStackSection />
       <AchievementSection />
-      <InvestmentSecttion />
-      <OnboardingSection />
+      <div id="onboarding-section">
+        <InvestmentSecttion />
+      </div>
+      <div id="onboarding-section">
+        <OnboardingSection />
+      </div>
     </>
   );
 };

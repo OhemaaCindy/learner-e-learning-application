@@ -1,7 +1,12 @@
 // import { allTracks } from "@/services/track-services";
 // import type { TrackResponse } from "@/types/track.type";
 // import { useQuery } from "@tanstack/react-query";
+import { allTracks } from "@/services/track-services";
 import { Calendar } from "lucide-react";
+import { TrackSectionShimmer } from "./skeleton";
+import { TrackResponse } from "@/types/track.type";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 // import { TrackSectionShimmer } from "./skeleton";
 // import { Link } from "react-router";
 // import { Button } from "./ui/button";
@@ -25,53 +30,53 @@ const TrackSection = () => {
     return courseColors[colorIndex];
   };
 
-  const trackCards = [
-    {
-      id: 1,
-      image:
-        "https://media.istockphoto.com/id/1435220822/photo/african-american-software-developer.jpg?b=1&s=612x612&w=0&k=20&c=bOgdeSmL8pEwoX91v2j0r5Qyln9IIhn779PzZBqqFdc=",
-      price: "100",
-      name: "Networking & Security",
-      courses: [{ title: "Ethical Hacking" }],
-      duration: "1 week",
-    },
-    {
-      id: 2,
-      image: "https://images.pexels.com/photos/270366/pexels-photo-270366.jpeg",
-      price: "3500",
-      name: "Web Development",
-      courses: [{ title: "React.js" }, { title: "html,css" }],
-      duration: "6 weeks",
-    },
-    {
-      id: 3,
-      image: "https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg",
-      price: "500",
-      name: "IT Support & Administration",
-      courses: [{ title: "Computer Hardware" }],
-      duration: "2 weeks",
-    },
-    {
-      id: 4,
-      image: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg",
-      price: "700",
-      name: "Data & Cloud Computing",
-      courses: [{ title: "Database Management" }],
-      duration: "8 weeks",
-    },
-  ];
-  // const { data, isLoading } = useQuery<TrackResponse, Error>({
-  //   queryKey: ["get-all-tracks"],
-  //   queryFn: allTracks,
-  // });
+  // const trackCards = [
+  //   {
+  //     id: 1,
+  //     image:
+  //       "https://media.istockphoto.com/id/1435220822/photo/african-american-software-developer.jpg?b=1&s=612x612&w=0&k=20&c=bOgdeSmL8pEwoX91v2j0r5Qyln9IIhn779PzZBqqFdc=",
+  //     price: "100",
+  //     name: "Networking & Security",
+  //     courses: [{ title: "Ethical Hacking" }],
+  //     duration: "1 week",
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://images.pexels.com/photos/270366/pexels-photo-270366.jpeg",
+  //     price: "3500",
+  //     name: "Web Development",
+  //     courses: [{ title: "React.js" }, { title: "html,css" }],
+  //     duration: "6 weeks",
+  //   },
+  //   {
+  //     id: 3,
+  //     image: "https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg",
+  //     price: "500",
+  //     name: "IT Support & Administration",
+  //     courses: [{ title: "Computer Hardware" }],
+  //     duration: "2 weeks",
+  //   },
+  //   {
+  //     id: 4,
+  //     image: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg",
+  //     price: "700",
+  //     name: "Data & Cloud Computing",
+  //     courses: [{ title: "Database Management" }],
+  //     duration: "8 weeks",
+  //   },
+  // ];
+  const { data, isLoading } = useQuery<TrackResponse, Error>({
+    queryKey: ["get-all-tracks"],
+    queryFn: allTracks,
+  });
 
-  // // Show shimmer while loading
-  // if (isLoading) {
-  //   return <TrackSectionShimmer />;
-  // }
+  // Show shimmer while loading
+  if (isLoading) {
+    return <TrackSectionShimmer />;
+  }
 
-  // const trackDetails = data?.tracks.slice(0, 4) || [];
-  // console.log("🚀 ~ TracksPage ~ trackDetails:", trackDetails);
+  const trackDetails = data?.tracks.slice(0, 4) || [];
+  console.log("🚀 ~ TracksPage ~ trackDetails:", trackDetails);
 
   return (
     <div className="flex flex-col justify-center items-center mt-10 mb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -83,8 +88,11 @@ const TrackSection = () => {
         then explore a wide range
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
-        {trackCards.map((item, cardIndex) => (
+      <Link
+        to="/tracks"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full cursor-pointer"
+      >
+        {trackDetails.map((item, cardIndex) => (
           <div
             key={item.id}
             className="w-full h-80 flex flex-col rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white mb-10"
@@ -121,7 +129,7 @@ const TrackSection = () => {
             </div>
           </div>
         ))}
-      </div>
+      </Link>
     </div>
   );
 };

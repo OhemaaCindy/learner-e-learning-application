@@ -16,12 +16,12 @@ const Protectedlayout = () => {
     // enabled: !!Cookies.get("token"),
   });
 
-  if (isLoading) {
-    return <div></div>;
-  }
+  // if (isLoading) {
+  //   return <div></div>;
+  // }
 
   // If error or no user data, redirect
-  if (isError || !data?.user) {
+  if (isError || isLoading || !data?.user) {
     console.log(error || "no user found");
     return <Navigate to="/" />;
   }

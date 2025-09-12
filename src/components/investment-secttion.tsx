@@ -17,7 +17,14 @@ const InvestmentSecttion = () => {
           </div>
           {/* right section */}
           <div className="pt-2 flex-shrink-0">
-            <button className="bg-[#01589A] hover:bg-blue-500 border border-white text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-sm text-base sm:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer">
+            <button
+              className="bg-[#01589A] hover:bg-blue-500 border border-white text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-sm text-base sm:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer"
+              onClick={() => {
+                document.getElementById("onboarding-section")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
               Get started
             </button>
           </div>

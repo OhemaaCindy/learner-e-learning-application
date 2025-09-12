@@ -31,14 +31,6 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
   } = useLearnerEnrollment();
 
   const onSubmit = (data: CheckoutFormData) => {
-    // console.log(
-    //   "🚀 ~ onSubmit ~ `${import.meta.env.BASE_URL}/checkout`:",
-    //   `${import.meta.env.BASE_URL}/checkout`
-    // );
-    // console.log(
-    //   "🚀 ~ onSubmit ~ `${import.meta.env.VITE_CLIENT_URL}/checkout`:",
-    //   `${import.meta.env.VITE_CLIENT_URL}/checkout`
-    // );
     checkoutLearner(
       {
         paystackCallbackUrl: `${import.meta.env.VITE_CLIENT_URL}/dashboard`,
@@ -47,13 +39,14 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
       },
       {
         onSuccess: (res) => {
-          // console.log("🚀 ~ onSuccess ~ res:", res);
           toast.success("Enrollment successful");
+          localStorage.setItem("trackId", trackId);
+
           window.location.href = res.transactionUrl;
         },
         onError: (error) => {
           toast.error(
-            error instanceof Error ? error.message : "Somthing went wrong"
+            error instanceof Error ? error.message : "Something went wrong"
           );
           console.log(error);
         },
