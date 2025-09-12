@@ -1,6 +1,6 @@
 export default function OnboardingSection() {
   return (
-    <div className="flex flex-col lg:flex-row max-w-7xl mx-auto mt-8 sm:mt-12 lg:mt-15 mb-16 sm:mb-20 lg:mb-30 gap-6 px-4 sm:px-6 lg:px-0">
+    <div className="flex flex-col lg:flex-row max-w-7xl mx-auto mt-8 sm:mt-12 lg:mt-15 mb-16 sm:mb-20 lg:mb-30 gap-20 px-4 sm:px-6 lg:px-0">
       <div className="space-y-6 w-full lg:w-auto">
         {/* Step 1: Sign Up */}
         <div className="bg-white rounded-lg shadow-md border border-gray-100 p-4 sm:p-6 relative w-full">
@@ -69,7 +69,7 @@ export default function OnboardingSection() {
       {/* right section */}
       <div className="shadow-xl rounded-md p-3 sm:p-4 w-full lg:w-auto">
         {/* Steps Section */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10 ">
           {/* Step 1 - Secure Login */}
           <div className="text-center">
             <div className="mb-4 sm:mb-6">
