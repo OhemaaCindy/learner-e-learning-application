@@ -19,14 +19,15 @@ const TracksPage = () => {
   const filteredTracks = trackOverview.filter((trackname) => {
     return trackname?.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
+  
 
   return (
     <div className="bg-[#02589A]">
       <div className=" max-w-7xl mx-auto  text-white p-10 flex justify-center ">
         <div className="text-3xl font-medium">Tracks</div>
       </div>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto ">
+      <div className="min-h-screen bg-gray-50 py-8 ">
+        <div className="max-w-7xl mx-auto md:max-w-6xl md:mx-auto">
           {/* Search Bar */}
           <div className="mb-8">
             <div className="relative max-w-md">
@@ -47,7 +48,7 @@ const TracksPage = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Top Tracks</h1>
           {isLoading && (
             <div className="min-h-screen bg-gray-50 py-8">
-              <div className="max-w-7xl mx-auto">
+              <div className="max-w-7xl mx-auto ">
                 {/* <h1 className="text-3xl font-bold text-gray-900 mb-8">
                   Top Tracks
                 </h1> */}

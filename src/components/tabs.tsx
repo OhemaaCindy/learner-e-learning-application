@@ -38,14 +38,14 @@ const NavigationTab: React.FC<NavigationTabProps> = ({
 );
 
 const NavigationSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>("dashboard");
+  const [activeTab, setActiveTab] = useState<string>("settings");
 
   const navItems: NavItem[] = [
-    {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: LayoutGrid,
-    },
+    // {
+    //   id: "dashboard",
+    //   label: "Dashboard",
+    //   icon: LayoutGrid,
+    // },
     {
       id: "settings",
       label: "Settings",
@@ -78,7 +78,7 @@ const NavigationSection: React.FC = () => {
           </nav>
         </div>
       </div>
-      {activeTab === "dashboard" && <LearnerDashboardPage />}
+      {/* {activeTab === "dashboard" && <LearnerDashboardPage />} */}
       {activeTab === "settings" && <SettingsTab />}
       {activeTab === "invoices" && <InvoiceTable />}
     </>

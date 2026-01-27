@@ -20,6 +20,7 @@ export function InvoiceTable() {
   });
 
   const invoiceList = data?.invoices || [];
+  // console.log("🚀 ~ InvoiceTable ~ invoiceList:", invoiceList)
 
   return (
     <div className="max-w-7xl mx-auto ">
@@ -29,7 +30,7 @@ export function InvoiceTable() {
       <Table className="bg-white h-full">
         <TableHeader>
           <TableRow>
-            <TableHead>#</TableHead>
+            {/* <TableHead>#</TableHead> */}
             <TableHead>Date</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead>Status</TableHead>
@@ -39,9 +40,9 @@ export function InvoiceTable() {
           {invoiceList ? (
             invoiceList.map((invoice) => (
               <TableRow key={invoice._id}>
-                <TableCell className="font-medium">{invoice._id}</TableCell>
+                {/* <TableCell className="font-medium">{invoice._id}</TableCell> */}
                 <TableCell>
-                  {format(new Date(invoice.dueDate), "PPP")}
+                  {format(new Date(invoice.updatedAt), "PPP")}
                 </TableCell>
                 <TableCell>${invoice.amount}</TableCell>
                 <TableCell>{invoice.status}</TableCell>

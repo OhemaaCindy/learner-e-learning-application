@@ -35,7 +35,7 @@ export function LoginForm({
   } = useLoginAdmin();
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log(data);
+    // console.log(data);
     loginUser(data, {
       onSuccess(res) {
         Cookies.set("token", res.token);
@@ -83,27 +83,8 @@ export function LoginForm({
                   Log in to continue your learning journey
                 </h1>
               </div>
-              <div className="grid gap-3">
-                <div className=" rounded-lg">
-                  <Button
-                    type="submit"
-                    // disabled={isSubmitting}
-                    variant="secondary"
-                    className=" cursor-pointer w-full p-4 border-1 border-[#01589A]"
-                  >
-                    {/* {isSubmitting ? "Logging in..." : "Log in using Google"} */}
-                    <div className="flex items-center justify-center gap-2">
-                      <img src="/Google.png" />
-                      Log in using Google
-                    </div>
-                  </Button>
-                </div>
-                <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                  <span className="bg-card text-muted-foreground relative z-10 px-2">
-                    Or
-                  </span>
-                </div>
-              </div>
+             
+                
               {/* <form> */}
               <InputField
                 name="email"

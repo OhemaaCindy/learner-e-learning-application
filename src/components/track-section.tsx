@@ -54,7 +54,7 @@ const TrackSection = () => {
         {trackDetails.map((item, cardIndex) => (
           <div
             key={item.id}
-            className="w-full h-72 sm:h-80 flex flex-col rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow duration-200"
+            className="w-full min-h-72 sm:h-80 flex flex-col rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow duration-200"
           >
             <div className="h-32 sm:h-40 relative flex items-center justify-center">
               <img
@@ -62,7 +62,7 @@ const TrackSection = () => {
                 alt="track image"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white bg-opacity-90 px-2 py-1 rounded-lg text-xs sm:text-sm font-semibold text-gray-800">
+              <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white bg-opacity-90 px-2 py-1 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 max-w-[80px] truncate">
                 ${item.price}
               </div>
             </div>
@@ -78,7 +78,7 @@ const TrackSection = () => {
                 {item.courses.slice(0, 2).map((course, index) => (
                   <span
                     key={index}
-                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium ${getCourseColor(
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium truncate max-w-[120px] sm:max-w-none ${getCourseColor(
                       cardIndex,
                       index
                     )}`}

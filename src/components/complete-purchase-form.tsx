@@ -64,9 +64,9 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
         </ul>
       )}
 
-      {data && data.success && (
+      {/* {data && data.success && (
         <p className="text-green-600 mt-2">{data.message}</p>
-      )}
+      )} */}
       <div className=" rounded-lg shadow-sm border border-gray-200 p-6 sticky top-4  ">
         <div className="text-center mb-6 ">
           <div className="text-3xl font-bold text-gray-900 mb-2">

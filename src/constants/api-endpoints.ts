@@ -22,20 +22,12 @@ export const apiEndpoints = {
   },
   INVOICES: {
     getInvoices: "/invoices",
-    // createInvoice: "/invoices",
-    // updateInvoice: "",
+   
   },
   LEARNERS: {
     updateProfile: "/auth/update",
     trackEnrollment: "/enrollments",
-    // getOneLearner: (id: string) => `/learners/${id}`,
+    
   },
-  //   COURSES: {
-  //     getAllCourses: "/courses",
-  //     createCourse: "/courses",
-  //     getSingleCourse: (id: string) => `/courses/${id}`,
-
-  //     deleteCourse: (id: string) => `/courses/${id}`,
-  //     updateCourse: (id: string) => `/courses/${id}`,
-  //   },
+ 
 };

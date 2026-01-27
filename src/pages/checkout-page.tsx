@@ -165,26 +165,20 @@ const CheckoutPage = () => {
                     error={errors.location?.message}
                     iconLeft={<MapPin className="h-5 w-5" />}
                   />
-
-                  <div className="mb-4 w-full">
-                    <select
-                      {...register("disabled")}
-                      name="disabled"
-                      className={cn(
-                        "w-full h-10   border rounded-md shadow-sm overflow-y-auto ",
-                        errors.disabled && "border-red-500 bg-red-50"
-                      )}
-                    >
-                      <option value="">Do you have disability?</option>
-                      <option value="true">true</option>
-                      <option value="false">false</option>
-                    </select>
-                    {errors.disabled && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.disabled?.message}
-                      </p>
+                  <select
+                    {...register("disabled", {
+                      setValueAs: (value) => value === "true",
+                    })}
+                    name="disabled"
+                    className={cn(
+                      "w-full h-10 border rounded-md shadow-sm overflow-y-auto",
+                      errors.disabled && "border-red-500 bg-red-50",
                     )}
-                  </div>
+                  >
+                    <option value="">Do you have disability?</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
 
                   {/* Description */}
                   <div className="mb-4 w-full">
