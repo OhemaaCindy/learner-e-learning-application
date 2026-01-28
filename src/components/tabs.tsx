@@ -47,15 +47,16 @@ const NavigationSection: React.FC = () => {
     //   icon: LayoutGrid,
     // },
     {
-      id: "settings",
-      label: "Settings",
-      icon: Settings,
-    },
-    {
       id: "invoices",
       label: "Invoices",
       icon: FileText,
     },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: Settings,
+    }
+    
   ];
 
   const handleTabClick = (id: string): void => {
@@ -79,8 +80,8 @@ const NavigationSection: React.FC = () => {
         </div>
       </div>
       {/* {activeTab === "dashboard" && <LearnerDashboardPage />} */}
-      {activeTab === "settings" && <SettingsTab />}
       {activeTab === "invoices" && <InvoiceTable />}
+      {activeTab === "settings" && <SettingsTab />}
     </>
   );
 };

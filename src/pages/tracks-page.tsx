@@ -27,7 +27,7 @@ const TracksPage = () => {
         <div className="text-3xl font-medium">Tracks</div>
       </div>
       <div className="min-h-screen bg-gray-50 py-8 ">
-        <div className="max-w-7xl mx-auto md:max-w-6xl md:mx-auto">
+        <div className="max-w-7xl mx-auto ">
           {/* Search Bar */}
           <div className="mb-8">
             <div className="relative max-w-md">

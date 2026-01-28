@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center h-16">
           <img
-            src="/logo.png"
+            src="/Icon.png"
             alt="logo"
             className="w-30 h-10 cursor-pointer"
             onClick={handleRoute}

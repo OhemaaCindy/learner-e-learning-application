@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="bg-[#01589A]">
       <footer className="flex flex-col lg:flex-row justify-between mx-auto max-w-7xl p-4 sm:p-6 lg:p-10 w-full">
         <div className="flex items-center space-x-2 mb-6 lg:mb-0">
-          <img src="/logo2.png" alt="logo" className="h-10 w-auto sm:w-40" />
+          <img src="/Icon2.png" alt="logo" className="h-10 w-auto sm:w-40" />
         </div>
         {/* Menu Section */}
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 lg:gap-30 w-full lg:w-auto">
@@ -36,9 +36,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4 text-white">Contact</h3>
             <div className="space-y-2 text-white">
               <p className="hover:text-blue-200 transition-colors duration-200 cursor-pointer">
-                +23341002000
+                +233594809966
               </p>
-              <p className="text-sm">New Reiss, Ghana, Accra</p>
+              <p className="text-sm">McCarthy, Ghana, Accra</p>
             </div>
           </div>
 
@@ -71,7 +71,7 @@ const Footer = () => {
               {/* Copyright */}
               <div className="flex items-center space-x-2 text-sm text-white text-center sm:text-left">
                 <span className="text-lg">©</span>
-                <span>copyright 2025 - G-client, All rights reserved</span>
+                <span>copyright 2025 - LearnBase, All rights reserved</span>
               </div>
 
               {/* Back to Top */}
