@@ -27,7 +27,7 @@ const CompletePurhase = ({ trackId, trackAmount }: PurchaseProps) => {
     isPending,
     error,
     isError,
-    data,
+    
   } = useLearnerEnrollment();
 
   const onSubmit = (data: CheckoutFormData) => {

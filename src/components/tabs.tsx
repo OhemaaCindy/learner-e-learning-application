@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { LayoutGrid, Settings, FileText } from "lucide-react";
-import LearnerDashboardPage from "./learner-dashboard";
+import {  Settings, FileText } from "lucide-react";
+// import LearnerDashboardPage from "./learner-dashboard";
 import { InvoiceTable } from "./table";
 import SettingsTab from "./setting-tab";
 
